@@ -114,7 +114,7 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                     <span className="inline-block text-xs font-extrabold tracking-[0.3em] uppercase text-primary mb-4">
                         Why Krowe
                     </span>
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold tracking-tight text-foreground mb-4">
+                    <h2 className="font-serif text-foreground text-4xl md:text-6xl tracking-tight leading-[1.1] text-balance mb-4">
                         From raw interviews to clear decisions.
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
