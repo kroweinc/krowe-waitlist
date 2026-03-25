@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { cn } from "../lib/utils"
 import { motion } from "framer-motion"
+import { AlertTriangle, Quote, Layers } from "lucide-react"
 
 // Typing animation hook
 function useTypingEffect(text: string, speed = 30, trigger = true) {
@@ -41,99 +42,51 @@ const directionOptions = {
         label: "Build",
         badge: "Ready to Build",
         badgeColor: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
-        explanation: "Your problem + buyer are clear. MVP is realistic for your resources.",
+        explanation: "Your interviews show clear pain + willingness to pay. The problem is real — build it.",
         reasons: [
-            "Clear problem-solution fit identified",
-            "Target buyer is specific and reachable",
-            "Scope matches available resources",
+            "Pain mentioned in 9 of 12 interviews",
+            "3 buyers asked about pricing",
+            "Scope is achievable in 6–8 weeks",
         ],
     },
     niche: {
         label: "Niche Down",
         badge: "Needs Focus",
         badgeColor: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-        explanation: "Strong direction, but the buyer is too broad. Narrow = faster traction.",
+        explanation: "Strong signal, but scattered across buyer types. Narrow your ICP before building.",
         reasons: [
-            "Problem resonates but audience is scattered",
-            "Too many competing priorities",
-            "Narrowing will accelerate validation",
+            "Pain resonates but buyers vary widely",
+            "No single ICP emerged from transcripts",
+            "Narrowing will unlock faster traction",
         ],
     },
     pivot: {
         label: "Pivot",
         badge: "Shift Angle",
         badgeColor: "bg-rose-500/10 text-rose-600 border-rose-500/20",
-        explanation: "The approach is costly or crowded. We'll shift the angle without restarting.",
+        explanation: "Your interviews surfaced a more pressing adjacent problem. Shift angle — don't restart.",
         reasons: [
-            "Current path has high execution risk",
-            "Market is saturated at this angle",
-            "Adjacent opportunity is more viable",
+            "Adjacent pain came up 8x unprompted",
+            "Current angle has high execution risk",
+            "Interviews point to a clearer opportunity",
         ],
     },
 }
 
-const tabs = ["Direction", "Next Move", "Tailored Plan"] as const
+const tabs = ["Insights", "Decisions", "Specs"] as const
 type TabType = (typeof tabs)[number]
-
-const analysisChips = ["Problem clarity", "Buyer specificity", "MVP realism"]
-
-const blueprintNodes = [
-    {
-        id: "problem",
-        label: "Problem Research",
-        relevantTo: ["Product", "Stage"],
-        colors: { bg: "bg-blue-500/5", border: "border-blue-500/10", dot: "bg-blue-400" },
-    },
-    {
-        id: "audience",
-        label: "Audience Research",
-        relevantTo: ["Customer", "Market"],
-        colors: { bg: "bg-purple-500/5", border: "border-purple-500/10", dot: "bg-purple-400" },
-    },
-    {
-        id: "competitor",
-        label: "Competitor Research",
-        relevantTo: ["Market", "Product"],
-        colors: { bg: "bg-orange-500/5", border: "border-orange-500/10", dot: "bg-orange-400" },
-    },
-    {
-        id: "mvp",
-        label: "MVP Build",
-        relevantTo: ["Product", "Stage"],
-        colors: { bg: "bg-emerald-500/5", border: "border-emerald-500/10", dot: "bg-emerald-400" },
-    },
-    {
-        id: "validation",
-        label: "Validation",
-        relevantTo: ["Stage", "Customer"],
-        colors: { bg: "bg-rose-500/5", border: "border-rose-500/10", dot: "bg-rose-400" },
-    },
-    {
-        id: "launch",
-        label: "Launch Prep",
-        relevantTo: ["Market", "Customer"],
-        colors: { bg: "bg-amber-500/5", border: "border-amber-500/10", dot: "bg-amber-400" },
-    },
-]
-
-const inputChips = [
-    { label: "Product", value: "Web app" },
-    { label: "Stage", value: "Validation" },
-    { label: "Market", value: "B2C" },
-    { label: "Customer", value: "Students" },
-]
 
 interface DecisionConsoleBenefitsProps {
   onJoinWaitlist?: () => void
 }
 
 export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionConsoleBenefitsProps) {
-    const [activeTab, setActiveTab] = useState<TabType>("Direction")
+    const [activeTab, setActiveTab] = useState<TabType>("Insights")
     const [directionChoice, setDirectionChoice] = useState<"build" | "niche" | "pivot">("build")
     const [isTransitioning, setIsTransitioning] = useState(false)
 
-    const currentDirection = directionOptions[directionChoice]
-    const { displayedText, isTyping } = useTypingEffect(currentDirection.explanation, 25, true)
+    const topProblemText = "Users consistently abandon after being asked to connect their calendar — 11 mentions across 14 interviews."
+    const { displayedText, isTyping } = useTypingEffect(topProblemText, 25, activeTab === "Insights")
 
     const handleTabChange = useCallback(
         (tab: TabType) => {
@@ -151,19 +104,21 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
         setDirectionChoice(choice)
     }, [])
 
+    const currentDirection = directionOptions[directionChoice]
+
     return (
         <section id="benefits" className="w-full py-24 md:py-32 bg-background">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-16">
                     <span className="inline-block text-xs font-extrabold tracking-[0.3em] uppercase text-primary mb-4">
-                        Benefits
+                        Why Krowe
                     </span>
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold tracking-tight text-foreground mb-4">
-                        Stop guessing. Get a clear direction.
+                    <h2 className="font-serif text-foreground text-4xl md:text-6xl tracking-tight leading-[1.1] text-balance mb-4">
+                        From raw interviews to clear decisions.
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Get a clear build / niche down / pivot decision — plus what to do next.
+                        Krowe turns hours of raw feedback into structured insights, product decisions, and dev-ready specs — in minutes.
                     </p>
                 </div>
 
@@ -216,9 +171,83 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                             isTransitioning ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0",
                         )}
                     >
-                        {/* Direction Tab */}
-                        {activeTab === "Direction" && (
-                            <div id="panel-Direction" role="tabpanel" aria-labelledby="tab-Direction">
+                        {/* Insights Tab */}
+                        {activeTab === "Insights" && (
+                            <div id="panel-Insights" role="tabpanel" aria-labelledby="tab-Insights">
+                                {/* Header row */}
+                                <div className="flex items-center justify-between mb-6">
+                                    <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground font-serif">
+                                        Analyzed 12 interviews
+                                    </span>
+                                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600 bg-gray-100 border border-border rounded-full px-2.5 py-1 font-serif">
+                                        3 min 42 sec
+                                    </span>
+                                </div>
+
+                                {/* Top Problem card */}
+                                <div className="bg-gray-50 border border-border rounded-xl p-4 mb-4">
+                                    <div className="flex items-start gap-3 mb-2">
+                                        <AlertTriangle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                                        <p className="text-sm font-semibold text-foreground font-serif">
+                                            Onboarding drop-off after step 2
+                                        </p>
+                                    </div>
+                                    <p className="text-sm text-gray-600 leading-relaxed font-serif min-h-[40px]">
+                                        {displayedText}
+                                        {isTyping && <span className="inline-block w-0.5 h-4 bg-gray-600 ml-0.5 animate-pulse" />}
+                                    </p>
+                                    <p className="text-xs text-amber-600 font-medium mt-2 font-serif">11x · Highest priority</p>
+                                </div>
+
+                                {/* Two-column row */}
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    {/* Key Quote card */}
+                                    <div className="bg-gray-50 border border-border rounded-xl p-4">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <Quote className="w-4 h-4 text-primary shrink-0" />
+                                            <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground font-serif">
+                                                Key Quote
+                                            </span>
+                                        </div>
+                                        <p className="text-sm italic text-gray-700 leading-relaxed font-serif mb-2">
+                                            "I knew what it did, I just couldn't get started."
+                                        </p>
+                                        <p className="text-xs text-muted-foreground font-serif">— Sarah, YC Founder</p>
+                                    </div>
+
+                                    {/* Meta Themes card */}
+                                    <div className="bg-gray-50 border border-border rounded-xl p-4">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <Layers className="w-4 h-4 text-muted-foreground shrink-0" />
+                                            <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground font-serif">
+                                                Meta Themes
+                                            </span>
+                                        </div>
+                                        <ul className="space-y-1.5">
+                                            {[
+                                                "Friction in first-run experience",
+                                                "Unclear value before commitment",
+                                                "Mobile experience gaps",
+                                            ].map((theme) => (
+                                                <li key={theme} className="text-sm text-gray-600 font-serif flex items-start gap-2">
+                                                    <span className="w-1 h-1 rounded-full bg-gray-400 mt-2 shrink-0" />
+                                                    {theme}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Decisions Tab */}
+                        {activeTab === "Decisions" && (
+                            <div id="panel-Decisions" role="tabpanel" aria-labelledby="tab-Decisions">
+                                {/* Label above segmented control */}
+                                <p className="text-center text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
+                                    Krowe's read on your interviews
+                                </p>
+
                                 {/* Segmented Control */}
                                 <div className="flex justify-center mb-8">
                                     <div className="inline-flex p-1 bg-gray-100 rounded-lg" role="radiogroup" aria-label="Direction choice">
@@ -260,11 +289,10 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                                     </span>
                                 </div>
 
-                                {/* Explanation with typing effect */}
+                                {/* Explanation */}
                                 <div className="text-center mb-8">
-                                    <p className="text-base md:text-lg text-black font-medium min-h-[28px]">
-                                        {displayedText}
-                                        {isTyping && <span className="inline-block w-0.5 h-5 bg-black ml-0.5 animate-pulse" />}
+                                    <p className="text-base md:text-lg text-black font-medium min-h-[28px] font-serif">
+                                        {currentDirection.explanation}
                                     </p>
                                 </div>
 
@@ -273,13 +301,13 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                                     {/* Left Column */}
                                     <div>
                                         <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
-                                            What we analyzed
+                                            Signals from interviews
                                         </h4>
                                         <div className="flex flex-wrap gap-2">
-                                            {analysisChips.map((chip) => (
+                                            {["Pain frequency", "Buyer specificity", "Willingness to pay"].map((chip) => (
                                                 <span
                                                     key={chip}
-                                                    className="inline-flex items-center px-3 py-1.5 text-sm font-medium bg-gray-100 text-black-900 rounded-full font-serif"
+                                                    className="inline-flex items-center px-3 py-1.5 text-sm font-medium bg-gray-100 text-gray-900 rounded-full font-serif"
                                                 >
                                                     {chip}
                                                 </span>
@@ -289,7 +317,7 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
 
                                     {/* Right Column */}
                                     <div>
-                                        <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 text-gray-500 font-serif">
+                                        <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
                                             Why this decision
                                         </h4>
                                         <ul className="space-y-2.5 list-disc pl-5">
@@ -304,132 +332,94 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                             </div>
                         )}
 
-                        {/* Next Move Tab */}
-                        {activeTab === "Next Move" && (
-                            <div id="panel-Next Move" role="tabpanel" aria-labelledby="tab-Next Move">
-                                <div className="grid md:grid-cols-3 gap-6">
-                                    {/* Task Feed */}
-                                    <div className="md:col-span-2 space-y-4">
-                                        {/* Header */}
-                                        <div className="flex items-center gap-3 mb-2">
-                                            <h4 className="text-sm font-semibold text-foreground font-serif">Today</h4>
-                                            <span className="text-xs font-medium text-gray-700 bg-gray-200 px-2 py-0.5 rounded-md">
-                                                Jan 16
-                                            </span>
-                                            <span className="text-xs font-medium text-muted-foreground bg-muted px-2 py-0.5 rounded ml-auto">
-                                                Est. 45 min
-                                            </span>
-                                        </div>
+                        {/* Specs Tab */}
+                        {activeTab === "Specs" && (
+                            <div id="panel-Specs" role="tabpanel" aria-labelledby="tab-Specs">
+                                {/* Header */}
+                                <p className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-6 font-serif">
+                                    Generated from your interviews
+                                </p>
 
-                                        {/* Primary Task */}
-                                        <div className="p-4 bg-gray-100 border border-border rounded-xl">
-                                            <div className="flex items-start gap-3">
-                                                <div className="w-5 h-5 rounded border-2 border-gray-600 mt-0.5 shrink-0" />
-                                                <div>
-                                                    <p className="text-base font-bold text-foreground font-serif">Define your first 10 user interviews</p>
-                                                    <p className="text-sm text-black mt-1 font-serif">Critical for validating your assumptions</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Up Next */}
-                                        <div className="space-y-2">
-                                            <p className="text-xs font-semibold tracking-wide uppercase text-muted-foreground font-serif">Up next</p>
-                                            <div className="p-3 border border-border/60 rounded-lg flex items-center gap-3">
-                                                <div className="w-4 h-4 rounded border border-border shrink-0" />
-                                                <p className="text-sm text-gray-500 font-serif">Write your 1-sentence positioning</p>
-                                            </div>
-                                            <div className="p-3 border border-border/60 rounded-lg flex items-center gap-3">
-                                                <div className="w-4 h-4 rounded border border-border shrink-0" />
-                                                <p className="text-sm text-gray-500 font-serif">List 5 direct competitors + pricing</p>
-                                            </div>
-                                        </div>
-
-                                        {/* Micro copy */}
-                                        <p className="text-xs text-muted-foreground pt-2 border-t border-border/50 text-gray-500 font-serif">
-                                            Open Krowe and instantly see the next task that actually matters.
-                                        </p>
-                                    </div>
-
-                                    {/* Why This Matters Panel */}
-                                    <div className="p-4 bg-gray-50 border border-border rounded-xl h-fit">
-                                        <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-3 text-gray-500 font-serif">
-                                            Why this matters
+                                {/* Two-column spec preview */}
+                                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                                    {/* Feature Specs */}
+                                    <div>
+                                        <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
+                                            Feature Specs
                                         </h4>
-                                        <p className="text-sm text-gray-600 leading-relaxed font-serif">
-                                            User interviews are the fastest way to validate (or invalidate) your core assumptions. Skip this
-                                            and you're building blind.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Tailored Plan Tab */}
-                        {activeTab === "Tailored Plan" && (
-                            <div id="panel-Tailored Plan" role="tabpanel" aria-labelledby="tab-Tailored Plan">
-                                {/* Input Chips */}
-                                <div className="mb-8">
-                                    <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 text-center font-serif">
-                                        Your Inputs
-                                    </h4>
-                                    <div className="flex flex-wrap justify-center gap-3">
-                                        {inputChips.map((chip) => (
-                                            <div
-                                                key={chip.label}
-                                                className={cn(
-                                                    "inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border transition-all cursor-default font-serif",
-                                                    "bg-muted border-border text-foreground",
-                                                )}
-                                            >
-                                                <span className="text-muted-foreground text-xs">{chip.label}:</span>
-                                                {chip.value}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Blueprint Grid */}
-                                <div className="mb-8">
-                                    <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 text-center font-serif">
-                                        Your Blueprint
-                                    </h4>
-                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 font-serif">
-                                        {blueprintNodes.map((node) => {
-                                            return (
-                                                <div
-                                                    key={node.id}
-                                                    className={cn(
-                                                        "p-4 rounded-xl border text-center transition-all duration-200 cursor-default group",
-                                                        node.colors.bg,
-                                                        node.colors.border,
-                                                        "hover:bg-opacity-80"
-                                                    )}
-                                                >
-                                                    <div
+                                        <div className="space-y-3">
+                                            {[
+                                                { text: "Skip calendar connect — offer manual entry fallback", priority: "High" },
+                                                { text: "Add progress indicator showing steps remaining", priority: "High" },
+                                                { text: "Surface core value before asking for permissions", priority: "Med" },
+                                            ].map((spec, i) => (
+                                                <div key={i} className="flex items-start gap-3">
+                                                    <div className="w-4 h-4 rounded border border-border mt-0.5 shrink-0" />
+                                                    <p className="text-sm text-gray-700 font-serif flex-1">{spec.text}</p>
+                                                    <span
                                                         className={cn(
-                                                            "w-3 h-3 rounded-full mx-auto mb-2 transition-all",
-                                                            node.colors.dot,
-                                                            "group-hover:brightness-90"
-                                                        )}
-                                                    />
-                                                    <p
-                                                        className={cn(
-                                                            "text-sm font-medium transition-colors",
-                                                            "text-muted-foreground",
+                                                            "text-xs font-medium px-2 py-0.5 rounded-full shrink-0 font-serif",
+                                                            spec.priority === "High"
+                                                                ? "bg-rose-500/10 text-rose-600"
+                                                                : "bg-gray-100 text-gray-600",
                                                         )}
                                                     >
-                                                        {node.label}
-                                                    </p>
+                                                        {spec.priority}
+                                                    </span>
                                                 </div>
-                                            )
-                                        })}
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Edge Cases */}
+                                    <div>
+                                        <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
+                                            Edge Cases
+                                        </h4>
+                                        <div className="space-y-3">
+                                            {[
+                                                "User has no existing calendar tool",
+                                                "First session on mobile device",
+                                                "Team account with multiple users",
+                                            ].map((edgeCase, i) => (
+                                                <div key={i} className="flex items-start gap-3">
+                                                    <span className="w-2 h-2 rounded-full bg-amber-400 mt-1.5 shrink-0" />
+                                                    <p className="text-sm text-gray-600 font-serif">{edgeCase}</p>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* Micro outcome */}
-                                <p className="text-center text-sm text-black">
-                                    No more forcing your startup into a template that wasn't made for you.
+                                {/* User Flow preview */}
+                                <div className="mb-6">
+                                    <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
+                                        User Flow
+                                    </h4>
+                                    <div className="flex items-center gap-2 flex-wrap">
+                                        {["Sign Up", "Onboarding"].map((step) => (
+                                            <span
+                                                key={step}
+                                                className="inline-flex items-center px-3 py-1.5 text-sm font-medium bg-gray-100 text-gray-700 rounded-full font-serif"
+                                            >
+                                                {step}
+                                            </span>
+                                        ))}
+                                        <span className="text-gray-400">→</span>
+                                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-amber-500/10 text-amber-700 rounded-full font-serif">
+                                            <AlertTriangle className="w-3.5 h-3.5" />
+                                            Drop-off point
+                                        </span>
+                                        <span className="text-gray-400">→</span>
+                                        <span className="inline-flex items-center px-3 py-1.5 text-sm font-medium bg-gray-100 text-gray-700 rounded-full font-serif">
+                                            Core Value
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Micro copy */}
+                                <p className="text-sm text-gray-500 font-serif">
+                                    Dev-ready specs from real user signals — no guesswork.
                                 </p>
                             </div>
                         )}
@@ -440,11 +430,11 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div className="flex items-center gap-4">
                                 <button
-                                className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 font-serif"
-                                type="button"
-                                onClick={() => onJoinWaitlist?.()}
+                                    className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 font-serif"
+                                    type="button"
+                                    onClick={() => onJoinWaitlist?.()}
                                 >
-                                    Get my direction
+                                    Analyze my interviews
                                 </button>
                                 <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded font-serif">
                                     See a sample report
@@ -452,7 +442,7 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                             </div>
                         </div>
                         <p className="text-xs text-muted-foreground text-center sm:text-left mt-3">
-                            Takes ~3 minutes. No fluff — just decisions.
+                            Upload your first transcript. Results in under 5 minutes.
                         </p>
                     </div>
                 </div>

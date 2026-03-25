@@ -1,3 +1,5 @@
+import { DashboardCard } from "./dashboard-card"
+
 interface FooterProps {
   onJoinWaitlist?: () => void
 }
@@ -8,23 +10,23 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
     // We'll duplicate the items in the ticker div to ensure smooth infinite loop.
 
     return (
-        <footer className="relative w-full bg-black border-t border-white/5 blueprint-grid pt-24 pb-8 antialiased overflow-hidden">
-            <div className="absolute top-0 left-0 w-full glow-line z-10"></div>
+        <footer className="relative w-full footer-dark border-t border-white/5 pt-24 pb-8 pb-[max(2rem,env(safe-area-inset-bottom))] antialiased overflow-hidden">
+            <div className="absolute top-0 left-0 w-full footer-glow-line z-10" aria-hidden />
             <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
                 <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
                     <div className="col-span-12 lg:col-span-8 flex flex-col justify-center">
                         <div className="space-y-2">
-                            <h2 className="text-4xl lg:text-8xl font-bold tracking-tighter leading-none font-serif">
-                                <span className="text-white">Stop guessing.</span><br />
-                                <span className="text-primary">Start building.</span>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tighter leading-none font-serif">
+                                <span className="text-white block whitespace-nowrap">Turn Customer Interviews.</span>
+                                <span className="text-primary block whitespace-nowrap">Into Decisions.</span>
                             </h2>
-                            <p className="text-slate-500 text-lg font-medium mt-2 max-w-xl pt-4">
-                                The only platform you'll need to both plan and research your idea. So you can foucs on the fun stuff.
+                            <p className="text-slate-400 text-lg font-medium mt-2 max-w-xl pt-4">
+                            The only platform you need to decide what to build next, so you can focus on actually building it.
                             </p>
                         </div>
                     </div>
                     <div className="col-span-12 lg:col-span-4">
-                        <div className="glass-panel rounded-2xl flex flex-col relative overflow-hidden group w-full p-6 lg:p-8">
+                        <div className="footer-glass-panel rounded-2xl flex flex-col relative overflow-hidden group w-full p-6 lg:p-8">
                             <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 blur-3xl rounded-full"></div>
                             <div className="mb-8 relative z-10">
                                 <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center mb-6 border border-primary/30">
@@ -52,104 +54,46 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
             <div className="mt-20 relative w-full overflow-hidden mask-fade">
                 <div className="ticker-animate flex gap-6 px-6 w-max">
                     {/* First Set */}
-                    <div className="flex gap-6">
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <div className="h-8 w-8 rounded-lg bg-orange-500/20 flex items-center justify-center">
-                                <span className="material-symbols-outlined text-primary text-xl">local_fire_department</span>
-                            </div>
-                            <div>
-                                <p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Current Streak</p>
-                                <p className="text-white font-bold text-sm">12 Days</p>
-                            </div>
-                        </div>
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <div className="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center">
-                                <span className="material-symbols-outlined text-primary text-xl">donut_large</span>
-                            </div>
-                            <div className="flex-1">
-                                <p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">MVP Progress</p>
-                                <div className="h-1.5 w-24 bg-white/10 rounded-full mt-1">
-                                    <div className="h-full w-3/4 bg-primary rounded-full"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <div className="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center">
-                                <span className="material-symbols-outlined text-primary text-xl">task_alt</span>
-                            </div>
-                            <div>
-                                <p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Open Tasks</p>
-                                <p className="text-white font-bold text-sm">8 Pending</p>
-                            </div>
-                        </div>
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <div className="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
-                            <div>
-                                <p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Environment</p>
-                                <p className="text-white font-bold text-sm">Production</p>
-                            </div>
-                        </div>
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <span className="material-symbols-outlined text-primary">analytics</span>
-                            <div>
-                                <p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Engagement</p>
-                                <p className="text-white font-bold text-sm">+24% WoW</p>
-                            </div>
-                        </div>
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <span className="material-symbols-outlined text-primary">hub</span>
-                            <div>
-                                <p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Active Nodes</p>
-                                <p className="text-white font-bold text-sm">147 Active</p>
-                            </div>
-                        </div>
+                    <div className="flex gap-6 items-stretch">
+                        <DashboardCard type="topProblem" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="keyQuote" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="metaThemes" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="featureSpecs" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="edgeCases" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="userFlow" variant="dark" className="h-44 w-56" />
                     </div>
-
-                    {/* Second Set (Duplicate) */}
-                    <div className="flex gap-6">
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <div className="h-8 w-8 rounded-lg bg-orange-500/20 flex items-center justify-center">
-                                <span className="material-symbols-outlined text-primary text-xl">local_fire_department</span>
-                            </div>
-                            <div><p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Current Streak</p><p className="text-white font-bold text-sm">12 Days</p></div>
-                        </div>
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <div className="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center"><span className="material-symbols-outlined text-primary text-xl">donut_large</span></div>
-                            <div className="flex-1"><p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">MVP Progress</p><div className="h-1.5 w-24 bg-white/10 rounded-full mt-1"><div className="h-full w-3/4 bg-primary rounded-full"></div></div></div>
-                        </div>
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <div className="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center"><span className="material-symbols-outlined text-primary text-xl">task_alt</span></div>
-                            <div><p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Open Tasks</p><p className="text-white font-bold text-sm">8 Pending</p></div>
-                        </div>
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <div className="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
-                            <div><p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Section</p><p className="text-white font-bold text-sm">Problem Research</p></div>
-                        </div>
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <span className="material-symbols-outlined text-primary">analytics</span>
-                            <div><p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Engagement</p><p className="text-white font-bold text-sm">+24% WoW</p></div>
-                        </div>
-                        <div className="glass-panel px-6 py-3 rounded-xl flex items-center gap-4 min-w-[200px]">
-                            <span className="material-symbols-outlined text-primary">hub</span>
-                            <div><p className="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Active Nodes</p><p className="text-white font-bold text-sm">147 Active</p></div>
-                        </div>
+                    {/* Second Set (Duplicate for infinite loop) */}
+                    <div className="flex gap-6 items-stretch">
+                        <DashboardCard type="topProblem" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="keyQuote" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="metaThemes" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="featureSpecs" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="edgeCases" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="userFlow" variant="dark" className="h-44 w-56" />
                     </div>
-
-                    {/* Third Set (Duplicate for smoothness on wide screens if needed, just 2 is probably enough if width is 50% relative to container, but let's stick to 2 for now as per user request code) -- Actually user code had 2 sets, I will keep 2. */}
+                    {/* Third Set */}
+                    <div className="flex gap-6 items-stretch">
+                        <DashboardCard type="topProblem" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="keyQuote" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="metaThemes" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="featureSpecs" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="edgeCases" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="userFlow" variant="dark" className="h-44 w-56" />
+                    </div>
                 </div>
             </div>
 
             <div className="max-w-[1280px] mx-auto px-6 lg:px-12 mt-20">
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div className="flex items-center gap-6">
+                    <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
                         <div className="flex items-center gap-2">
-                            <img src="KroweIcon.svg" width={35} height={3}></img>
+                            <img src="KroweIcon.svg" width={35} height={3} alt="" />
                             <span className="font-bold text-lg text-white font-display">Krowe</span>
                         </div>
                         <p className="text-xs text-slate-500 font-medium">© 2026 Krowe Technologies Inc.</p>
                     </div>
-                    <div className="flex items-center gap-8">
-                        <div className="flex items-center gap-6 text-sm font-medium text-slate-400">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 w-full md:w-auto">
+                        <div className="flex items-center justify-center flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-slate-400">
                             <a className="hover:text-primary transition-colors" href="#">Privacy</a>
                             <a className="hover:text-primary transition-colors" href="#">Terms</a>
                             <a className="hover:text-primary transition-colors" href="#">Contact</a>
