@@ -4,12 +4,12 @@ export default function Features() {
     return (
         <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-20 relative">
             <div className="max-w-3xl mx-auto text-center mb-32">
-                <h4 className="text-primary text-xs font-extrabold tracking-[0.3em] uppercase mb-4">Your Journey with Krowe</h4>
+                <h4 className="text-primary text-xs font-extrabold tracking-[0.3em] uppercase mb-4">How it works</h4>
                 <h1 className="font-serif text-foreground text-4xl md:text-6xl tracking-tight leading-[1.1] mb-6">
-                    A clear path from idea to MVP
+                Turn user insights into product decision.
                 </h1>
                 <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-                    Each step building upon the last in a structured, descending progression toward your market launch.
+                Each step builds on real user signals, narrowing down to one clear decision on what to build.
                 </p>
             </div>
             <div className="relative max-w-5xl mx-auto">
