@@ -90,25 +90,40 @@ export function Hero({ onJoinWaitlist }: HeroProps) {
         {/*<p className="mt-8 text-sm text-muted-foregroun font-semibold">Built for first-time founders • No fluff • Action-first</p>*/}
       </div>
 
-      {/* Company Promo Section */}
-      <div className="container mx-auto px-6 mt-6 relative z-10">
-        <p className="text-center text-slate-400 font-semibold text-sm uppercase tracking-[0.2em] mb-6">As Seen in</p>
-        <div className="flex flex-wrap justify-center items-center gap-16 md:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
-          <div className="flex items-center space-x-1">
-            <img src="YC Logo Gray.png" alt="loom" width={35} height={35} />
-            <span className="text-2xl font-bold font-display tracking-tighter">Hacker News</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <img src="product hunt gray.webp" alt="loom" width={35} height={35} />
-            <span className="text-2xl font-bold font-display tracking-tighter">Product Hunt</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <img src="Real-SHIP.png" alt="SHIP" width={35} height={35} />
-            <span className="text-2xl font-bold font-display tracking-tighter">SHIP</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <img src="founderULogoGrey.webp" alt="Founder University" width={35} height={35} />
-            <span className="text-2xl font-bold font-display tracking-tighter">Founder University</span>
+      {/* Ivy League Carousel */}
+      <div className="container mx-auto px-6 mt-0 relative z-10">
+        <p className="text-center text-slate-400 font-semibold text-sm uppercase tracking-[0.2em] mb-6">Trusted by students at</p>
+        <div className="overflow-hidden opacity-50 grayscale hover:grayscale-0 hover:[animation-play-state:paused] transition-all duration-300">
+          <div className="flex items-center ticker-animate hover:[animation-play-state:paused]" style={{ width: 'max-content' }}>
+            {(() => {
+              // These `src` values map to the exact filenames in `public/ivy/`.
+              // Several files contain spaces, so we URL-encode them here.
+              const schools = [
+                { name: "Harvard", src: "/ivy/harvard%20logo%20.png" },
+                { name: "Yale", src: "/ivy/yale%20logo.png" },
+                { name: "NYU", src: "/ivy/nyu%20logo.png" },
+                { name: "MIT", src: "/ivy/MIT%20Logo%20png%20.png" },
+                { name: "Stanford", src: "/ivy/stanfordlogo.png" },
+                { name: "Penn", src: "/ivy/upenn%20logo.png" },
+                { name: "Berkeley", src: "/ivy/uc%20berkley%20logo%20png%20.png" },
+                { name: "UT Austin", src: "/ivy/ut%20austin%20logo.png" },
+              ]
+
+              // Repeat to keep the ticker flowing.
+              const repeatedSchools = [...schools, ...schools, ...schools]
+              return repeatedSchools.map((school, i) => (
+              <div key={i} className="flex items-center mx-10">
+                {/* NYU PNG has extra transparent padding; `object-cover` fills the same box without changing carousel spacing. */}
+                <img
+                  src={school.src}
+                  alt={school.name}
+                  width={school.name === "Yale" ? 72 : 96}
+                  height={school.name === "Yale" ? 72 : 96}
+                  className={school.name === "NYU" ? "object-cover" : "object-contain"}
+                />
+              </div>
+              ))
+            })()}
           </div>
         </div>
       </div>
