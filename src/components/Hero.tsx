@@ -55,8 +55,8 @@ export function Hero({ onJoinWaitlist }: HeroProps) {
 
       {/* Main content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center min-h-[70vh]">
-        <h1 className="font-serif text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-foreground text-balance">
-          <span className="whitespace-nowrap">Turn Customer Interviews.</span>
+        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-foreground text-balance">
+          <span className="sm:whitespace-nowrap">Turn Customer Interviews.</span>
           <br />
           <span className="text-primary">Into Decisions.</span>
         </h1>
