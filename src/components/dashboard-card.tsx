@@ -11,6 +11,8 @@ interface DashboardCardProps {
     className?: string
     showLabel?: boolean
     label?: string
+    /** Dark frosted cards for footer / dark sections */
+    variant?: "default" | "dark"
 }
 
 interface CardContentData {
@@ -27,7 +29,7 @@ interface CardContentData {
     count?: string
 }
 
-export function DashboardCard({ type, className, showLabel = false, label }: DashboardCardProps) {
+export function DashboardCard({ type, className, showLabel = false, label, variant = "default" }: DashboardCardProps) {
     const cardContent: Record<CardType, CardContentData> = {
         streak: {
             icon: Flame,
@@ -122,17 +124,26 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
 
     const content = cardContent[type]
     const Icon = content.icon
+    const dark = variant === "dark"
+    const tf = dark ? "text-zinc-100" : "text-card-foreground"
+    const tm = dark ? "text-zinc-400" : "text-muted-foreground"
+    const tb = dark ? "text-zinc-200" : "text-foreground"
+    const track = dark ? "bg-white/10" : "bg-secondary"
+    const quoteBg = dark ? "bg-white/10" : "bg-secondary/60"
 
     return (
         <div className="flex flex-col gap-1.5">
             {showLabel && (
-                <span className="text-xs uppercase tracking-wider text-muted-foreground pl-1">
+                <span className={cn("text-xs uppercase tracking-wider pl-1", tm)}>
                     {label || content.defaultLabel}
                 </span>
             )}
             <div
                 className={cn(
-                    "w-56 bg-card border border-border rounded-xl p-4 shadow-lg hover:shadow-xl hover:border-primary/20 transition-all duration-300",
+                    "w-56 rounded-xl border p-4 shadow-lg hover:shadow-xl transition-all duration-300",
+                    dark
+                        ? "bg-white/[0.07] border-white/10 shadow-black/20 hover:border-primary/35"
+                        : "bg-card border-border hover:border-primary/20",
                     className,
                 )}
             >
@@ -142,8 +153,8 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                             <Icon className={cn("w-5 h-5", content.accent)} />
                         </div>
                         <div>
-                            <p className="font-semibold text-card-foreground">{content.title}</p>
-                            <p className="text-sm text-muted-foreground">{content.subtitle}</p>
+                            <p className={cn("font-semibold", tf)}>{content.title}</p>
+                            <p className={cn("text-sm", tm)}>{content.subtitle}</p>
                         </div>
                     </div>
                 )}
@@ -152,11 +163,11 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-3">
                             <Icon className="w-4 h-4 text-primary" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
                         <ul className="space-y-2">
                             {content.items?.map((item, i) => (
-                                <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <li key={i} className={cn("flex items-center gap-2 text-sm", tm)}>
                                     <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
                                     {item}
                                 </li>
@@ -170,11 +181,11 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                         <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center gap-2">
                                 <Icon className="w-4 h-4 text-primary" />
-                                <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                                <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                             </div>
                             <span className="text-sm font-medium text-primary">{content.progress}%</span>
                         </div>
-                        <div className="h-2 bg-secondary rounded-full overflow-hidden">
+                        <div className={cn("h-2 rounded-full overflow-hidden", track)}>
                             <div
                                 className="h-full bg-primary rounded-full transition-all duration-500"
                                 style={{ width: `${content.progress}%` }}
@@ -187,10 +198,10 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <Icon className="w-4 h-4 text-primary" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
-                        <p className="text-lg font-semibold text-foreground">{content.subtitle}</p>
-                        <p className="text-sm text-muted-foreground">{content.detail}</p>
+                        <p className={cn("text-lg font-semibold", tb)}>{content.subtitle}</p>
+                        <p className={cn("text-sm", tm)}>{content.detail}</p>
                     </div>
                 )}
 
@@ -198,10 +209,10 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <Icon className="w-4 h-4 text-primary" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
                         <p className="text-3xl font-bold text-primary">{content.score}</p>
-                        <p className="text-sm text-muted-foreground">{content.detail}</p>
+                        <p className={cn("text-sm", tm)}>{content.detail}</p>
                     </div>
                 )}
 
@@ -209,10 +220,10 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <Icon className="w-4 h-4 text-primary" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
-                        <p className="text-lg font-semibold text-foreground">{content.subtitle}</p>
-                        <p className="text-sm text-muted-foreground">{content.detail}</p>
+                        <p className={cn("text-lg font-semibold", tb)}>{content.subtitle}</p>
+                        <p className={cn("text-sm", tm)}>{content.detail}</p>
                     </div>
                 )}
 
@@ -220,10 +231,10 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <Icon className="w-4 h-4 text-primary" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
-                        <p className="text-3xl font-bold text-foreground">{content.count}</p>
-                        <p className="text-sm text-muted-foreground">{content.detail}</p>
+                        <p className={cn("text-3xl font-bold", tb)}>{content.count}</p>
+                        <p className={cn("text-sm", tm)}>{content.detail}</p>
                     </div>
                 )}
 
@@ -231,10 +242,10 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <Icon className="w-4 h-4 text-primary" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
-                        <p className="text-sm font-semibold text-foreground leading-snug">{content.subtitle}</p>
-                        <p className="text-xs text-muted-foreground mt-1">
+                        <p className={cn("text-sm font-semibold leading-snug", tb)}>{content.subtitle}</p>
+                        <p className={cn("text-xs mt-1", tm)}>
                             <span className="font-bold text-primary">{content.count}x</span> {content.detail}
                         </p>
                     </div>
@@ -244,12 +255,12 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <Icon className="w-4 h-4 text-primary" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
-                        <div className="bg-secondary/60 rounded-lg px-3 py-2 mb-2">
-                            <p className="text-xs italic text-foreground leading-snug">{content.subtitle}</p>
+                        <div className={cn("rounded-lg px-3 py-2 mb-2", quoteBg)}>
+                            <p className={cn("text-xs italic leading-snug", tb)}>{content.subtitle}</p>
                         </div>
-                        <p className="text-xs text-muted-foreground">{content.detail}</p>
+                        <p className={cn("text-xs", tm)}>{content.detail}</p>
                     </div>
                 )}
 
@@ -257,11 +268,11 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-3">
                             <Icon className="w-4 h-4 text-primary" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
                         <ul className="space-y-2">
                             {content.items?.map((item, i) => (
-                                <li key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <li key={i} className={cn("flex items-center gap-2 text-xs", tm)}>
                                     <div className="w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
                                     {item}
                                 </li>
@@ -274,11 +285,11 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-3">
                             <Icon className="w-4 h-4 text-amber-500" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
                         <ul className="space-y-2">
                             {content.items?.map((item, i) => (
-                                <li key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <li key={i} className={cn("flex items-center gap-2 text-xs", tm)}>
                                     <div className="w-1.5 h-1.5 rounded-full bg-amber-500/70 shrink-0" />
                                     {item}
                                 </li>
@@ -291,20 +302,20 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <Icon className="w-4 h-4 text-primary" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
-                        <p className="text-sm font-semibold text-foreground mb-2">{content.subtitle}</p>
+                        <p className={cn("text-sm font-semibold mb-2", tb)}>{content.subtitle}</p>
                         <div className="flex items-center justify-between mb-1">
-                            <span className="text-xs text-muted-foreground">Confidence</span>
+                            <span className={cn("text-xs", tm)}>Confidence</span>
                             <span className="text-xs font-medium text-primary">{content.progress}%</span>
                         </div>
-                        <div className="h-1.5 bg-secondary rounded-full overflow-hidden mb-2">
+                        <div className={cn("h-1.5 rounded-full overflow-hidden mb-2", track)}>
                             <div
                                 className="h-full bg-primary rounded-full"
                                 style={{ width: `${content.progress}%` }}
                             />
                         </div>
-                        <p className="text-xs text-muted-foreground">{content.detail}</p>
+                        <p className={cn("text-xs", tm)}>{content.detail}</p>
                     </div>
                 )}
 
@@ -312,11 +323,11 @@ export function DashboardCard({ type, className, showLabel = false, label }: Das
                     <div>
                         <div className="flex items-center gap-2 mb-3">
                             <Icon className="w-4 h-4 text-primary" />
-                            <p className="font-semibold text-card-foreground text-sm">{content.title}</p>
+                            <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                         </div>
                         <ol className="space-y-2">
                             {content.items?.map((item, i) => (
-                                <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
+                                <li key={i} className={cn("flex items-start gap-2 text-xs", tm)}>
                                     <span className="w-4 h-4 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center shrink-0 text-[10px]">
                                         {i + 1}
                                     </span>
