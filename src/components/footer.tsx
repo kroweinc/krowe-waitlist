@@ -10,7 +10,7 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
     // We'll duplicate the items in the ticker div to ensure smooth infinite loop.
 
     return (
-        <footer className="relative w-full footer-dark border-t border-white/5 pt-24 pb-8 antialiased overflow-hidden">
+        <footer className="relative w-full footer-dark border-t border-white/5 pt-24 pb-8 pb-[max(2rem,env(safe-area-inset-bottom))] antialiased overflow-hidden">
             <div className="absolute top-0 left-0 w-full footer-glow-line z-10" aria-hidden />
             <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
                 <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -85,15 +85,15 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
 
             <div className="max-w-[1280px] mx-auto px-6 lg:px-12 mt-20">
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div className="flex items-center gap-6">
+                    <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
                         <div className="flex items-center gap-2">
                             <img src="KroweIcon.svg" width={35} height={3} alt="" />
                             <span className="font-bold text-lg text-white font-display">Krowe</span>
                         </div>
                         <p className="text-xs text-slate-500 font-medium">© 2026 Krowe Technologies Inc.</p>
                     </div>
-                    <div className="flex items-center gap-8">
-                        <div className="flex items-center gap-6 text-sm font-medium text-slate-400">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 w-full md:w-auto">
+                        <div className="flex items-center justify-center flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-slate-400">
                             <a className="hover:text-primary transition-colors" href="#">Privacy</a>
                             <a className="hover:text-primary transition-colors" href="#">Terms</a>
                             <a className="hover:text-primary transition-colors" href="#">Contact</a>
