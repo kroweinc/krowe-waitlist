@@ -14,12 +14,12 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
                 <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
                     <div className="col-span-12 lg:col-span-8 flex flex-col justify-center">
                         <div className="space-y-2">
-                            <h2 className="text-4xl lg:text-8xl font-bold tracking-tighter leading-none font-serif">
-                                <span className="text-white">Stop guessing.</span><br />
-                                <span className="text-primary">Start building.</span>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tighter leading-none font-serif">
+                                <span className="text-white block whitespace-nowrap">Turn Customer Interviews.</span>
+                                <span className="text-primary block whitespace-nowrap">Into Decisions.</span>
                             </h2>
                             <p className="text-slate-500 text-lg font-medium mt-2 max-w-xl pt-4">
-                                The only platform you'll need to both plan and research your idea. So you can foucs on the fun stuff.
+                            The only platform you need to decide what to build next, so you can focus on actually building it.
                             </p>
                         </div>
                     </div>

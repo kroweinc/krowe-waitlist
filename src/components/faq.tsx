@@ -26,7 +26,7 @@ const tickets: Ticket[] = [
     {
         id: 1,
         tag: "VALIDATION",
-        question: "Is Krowe just another AI chatbot?",
+        question: "Is Krowe just another GPT Wrapper?",
         answer:
             "No. Krowe is a structured system, not a chat window. It takes your idea through analysis, surfaces real risks, and hands you a plan — not a wall of generic text.",
         bullets: ["Idea analysis with real signal", "Risks flagged before you waste time", "Output is a plan, not a conversation"],
