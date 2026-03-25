@@ -62,14 +62,16 @@ export default function Features() {
 
                     {/* Center divider */}
                     <div className="col-span-2 bg-secondary/30 border-r border-border flex flex-col items-center justify-center gap-4">
-                        <span className="flex items-center gap-1.5 bg-background border border-border rounded-full px-3 py-1.5 text-xs font-semibold shadow-sm">
-                            <Sparkles className="w-3 h-3 text-primary" />
-                            Krowe AI
-                        </span>
-                        <div className="flex flex-col items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" style={{ animationDelay: "0ms" }} />
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" style={{ animationDelay: "200ms" }} />
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" style={{ animationDelay: "400ms" }} />
+                        <div className="relative flex flex-col items-center pt-3">
+                            <div className="absolute -top-0.5 flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" style={{ animationDelay: "0ms" }} />
+                                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" style={{ animationDelay: "200ms" }} />
+                                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" style={{ animationDelay: "400ms" }} />
+                            </div>
+                            <span className="flex items-center gap-1.5 bg-background border border-border rounded-full px-3 py-1.5 text-xs font-semibold shadow-sm">
+                                <Sparkles className="w-3 h-3 text-primary" />
+                                Krowe AI
+                            </span>
                         </div>
                         <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
