@@ -25,13 +25,12 @@ export function Hero({ onJoinWaitlist }: HeroProps) {
   const effectiveScrollY = Math.min(scrollY, MAX_SCROLL_THRESHOLD)
 
   const cards = [
-    { type: "streak" as const, rotation: -3, x: -380, y: -31, blur: 2, z: 1 }, //done
-    { type: "tasks" as const, rotation: 2, x: 380, y: -31, blur: 1, z: 2 }, //done
-    { type: "progress" as const, rotation: -2, x: -500, y: -250, blur: 3, z: 0 },
-    { type: "section" as const, rotation: 3, x: 500, y: -250, blur: 2, z: 1 }, //done
-    // { type: "feasibility" as const, rotation: 1, x: 0, y: 120, blur: 0, z: 3 },
-    { type: "milestone" as const, rotation: -1, x: -500, y: 160, blur: 2, z: 1 }, //done
-    { type: "competitor" as const, rotation: 2, x: 500, y: 160, blur: 2, z: 1 }, //done
+    { type: "topProblem" as const,   rotation: -3, x: -380, y: -31,  blur: 2, z: 1 },
+    { type: "keyQuote" as const,     rotation:  2, x:  380, y: -31,  blur: 1, z: 2 },
+    { type: "metaThemes" as const,   rotation: -2, x: -500, y: -250, blur: 3, z: 0 },
+    { type: "featureSpecs" as const, rotation:  3, x:  500, y: -250, blur: 2, z: 1 },
+    { type: "edgeCases" as const,    rotation: -1, x: -500, y:  160, blur: 2, z: 1 },
+    { type: "userFlow" as const,     rotation:  2, x:  500, y:  160, blur: 2, z: 1 },
   ]
 
   return (
@@ -57,13 +56,13 @@ export function Hero({ onJoinWaitlist }: HeroProps) {
       {/* Main content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center min-h-[70vh]">
         <h1 className="font-serif text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-foreground text-balance">
-          Stop wondering.
+          <span className="whitespace-nowrap">Turn Customer Interviews.</span>
           <br />
-          <span className="text-primary">Start building.</span>
+          <span className="text-primary">Into Decisions.</span>
         </h1>
 
         <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-          We plan and research your idea, so you can focus on the fun stuff building.
+           We analyze real user feedback that helps you validate your idea, know when to pivot, and makes dev ready specs.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
