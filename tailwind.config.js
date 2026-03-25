@@ -4,12 +4,45 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: "#FF6B4A", // Matching the orange from the screenshot/prompt
+                background: "hsl(var(--background))",
+                foreground: "hsl(var(--foreground))",
+                primary: {
+                    DEFAULT: "hsl(var(--primary))",
+                    foreground: "hsl(var(--primary-foreground))",
+                },
                 "background-light": "#FAFAFA",
                 "surface-light": "#FFFFFF",
                 "text-light": "#1A1A1A",
                 "text-muted-light": "#666666",
-                "navy": "#0f172a", // Added for new Hero
+                "navy": "#0f172a",
+                card: {
+                    DEFAULT: "hsl(var(--card))",
+                    foreground: "hsl(var(--card-foreground))",
+                },
+                border: "hsl(var(--border))",
+                input: "hsl(var(--input))",
+                ring: "hsl(var(--ring))",
+                secondary: {
+                    DEFAULT: "hsl(var(--secondary))",
+                    foreground: "hsl(var(--secondary-foreground))",
+                },
+                muted: {
+                    DEFAULT: "hsl(var(--muted))",
+                    foreground: "hsl(var(--muted-foreground))",
+                },
+                "muted-foreground": "hsl(var(--muted-foreground))",
+                accent: {
+                    DEFAULT: "hsl(var(--accent))",
+                    foreground: "hsl(var(--accent-foreground))",
+                },
+                destructive: {
+                    DEFAULT: "hsl(var(--destructive))",
+                    foreground: "hsl(var(--destructive-foreground))",
+                },
+                popover: {
+                    DEFAULT: "hsl(var(--popover))",
+                    foreground: "hsl(var(--popover-foreground))",
+                },
             },
             fontFamily: {
                 sans: ["Avenir", "sans-serif"],
