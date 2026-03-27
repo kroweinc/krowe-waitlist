@@ -11,12 +11,14 @@ type FormState = {
   message: string;
   uses_canva: string;
   twitter: string;
-  instagram: string;
-  tiktok: string;
+  github: string;
   heard_from: string;
 };
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
+
+const MAX_RESUME_SIZE = 5 * 1024 * 1024; // 5 MB
+const ALLOWED_RESUME_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 
 export default function ApplyPage() {
   const [searchParams] = useSearchParams();
@@ -33,10 +35,11 @@ export default function ApplyPage() {
     message: '',
     uses_canva: '',
     twitter: '',
-    instagram: '',
-    tiktok: '',
+    github: '',
     heard_from: '',
   });
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeError, setResumeError] = useState('');
   const [status, setStatus] = useState<SubmitStatus>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -44,12 +47,51 @@ export default function ApplyPage() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
+  function handleResumeChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0] ?? null;
+    setResumeError('');
+    if (!file) { setResumeFile(null); return; }
+    if (!ALLOWED_RESUME_TYPES.includes(file.type)) {
+      setResumeError('Only PDF, DOC, or DOCX files are accepted.');
+      setResumeFile(null);
+      return;
+    }
+    if (file.size > MAX_RESUME_SIZE) {
+      setResumeError('File must be under 5 MB.');
+      setResumeFile(null);
+      return;
+    }
+    setResumeFile(file);
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('loading');
     setErrorMsg('');
 
-    const { error } = await supabase.from('job_applications').insert({
+    let resume_url: string | null = null;
+
+    if (resumeFile) {
+      const ext = resumeFile.name.split('.').pop();
+      const folder = role.replace(/[^a-z0-9]/gi, '_');
+      const path = `${folder}/${Date.now()}_${form.email.trim().replace(/[^a-z0-9]/gi, '_')}.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from('resumes')
+        .upload(path, resumeFile, { contentType: resumeFile.type });
+
+      if (uploadError) {
+        console.error('Resume upload error:', uploadError);
+        setStatus('error');
+        setErrorMsg('Failed to upload resume. Please try again.');
+        return;
+      }
+
+      const { data: urlData } = supabase.storage.from('resumes').getPublicUrl(path);
+      resume_url = urlData.publicUrl;
+    }
+
+    const table = isMarketingIntern ? 'marketing_applications' : 'frontend_applications';
+    const { error } = await supabase.from(table).insert({
       role,
       name: form.name.trim(),
       email: form.email.trim(),
@@ -58,12 +100,13 @@ export default function ApplyPage() {
       message: form.message.trim(),
       uses_canva: isMarketingIntern ? form.uses_canva || null : null,
       twitter: form.twitter.trim() || null,
-      instagram: form.instagram.trim() || null,
-      tiktok: form.tiktok.trim() || null,
+      github: form.github.trim() || null,
       heard_from: form.heard_from || null,
+      resume_url,
     });
 
     if (error) {
+      console.error('Supabase error:', error);
       setStatus('error');
       setErrorMsg('Something went wrong. Please try again.');
     } else {
@@ -72,7 +115,7 @@ export default function ApplyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-x-hidden w-full blueprint-grid-light">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-x-hidden w-full blueprint-grid-light font-serif">
       {/* Header */}
       <header className="w-full py-4 fixed top-0 left-0 right-0 z-50 pointer-events-none">
         <nav className="mx-auto max-w-5xl px-4 w-full pointer-events-auto">
@@ -217,28 +260,47 @@ export default function ApplyPage() {
                     />
                   </div>
                   <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary transition">
-                    <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">Instagram</span>
+                    <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">GitHub</span>
                     <input
-                      name="instagram"
+                      name="github"
                       type="text"
-                      value={form.instagram}
+                      value={form.github}
                       onChange={handleChange}
-                      placeholder="@handle"
-                      className="flex-1 text-sm text-navy placeholder:text-gray-400 bg-transparent focus:outline-none"
-                    />
-                  </div>
-                  <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary transition">
-                    <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">TikTok</span>
-                    <input
-                      name="tiktok"
-                      type="text"
-                      value={form.tiktok}
-                      onChange={handleChange}
-                      placeholder="@handle"
+                      placeholder="username"
                       className="flex-1 text-sm text-navy placeholder:text-gray-400 bg-transparent focus:outline-none"
                     />
                   </div>
                 </div>
+              </div>
+
+              {/* Resume upload */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-text-muted-light" htmlFor="resume">
+                  Resume <span className="font-normal opacity-60">(optional · PDF, DOC, DOCX · max 5 MB)</span>
+                </label>
+                <label
+                  htmlFor="resume"
+                  className={`flex items-center gap-3 rounded-lg border px-4 py-3 cursor-pointer transition ${
+                    resumeFile
+                      ? 'border-primary bg-primary/5'
+                      : 'border-gray-200 bg-white hover:border-gray-300'
+                  }`}
+                >
+                  <svg className="w-4 h-4 text-text-muted-light flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                  </svg>
+                  <span className="text-sm text-navy truncate">
+                    {resumeFile ? resumeFile.name : 'Choose file…'}
+                  </span>
+                  <input
+                    id="resume"
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleResumeChange}
+                    className="sr-only"
+                  />
+                </label>
+                {resumeError && <p className="text-xs text-red-500">{resumeError}</p>}
               </div>
 
               {isMarketingIntern && (
@@ -287,7 +349,6 @@ export default function ApplyPage() {
                   <option value="" disabled>Select an option</option>
                   <option value="Instagram">Instagram</option>
                   <option value="Twitter / X">Twitter / X</option>
-                  <option value="TikTok">TikTok</option>
                   <option value="LinkedIn">LinkedIn</option>
                   <option value="Friend or referral">Friend or referral</option>
                   <option value="Google / Search">Google / Search</option>

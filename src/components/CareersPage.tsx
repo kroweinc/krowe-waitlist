@@ -15,7 +15,7 @@ const jobs = [
     ],
   },
   {
-    title: 'Frontend / UI & UX Designer',
+    title: 'Frontend / UI & UX Engineer',
     type: 'Full-time · Remote',
     description:
       "Own the visual and interactive experience of the Krowe platform. You'll translate product requirements into polished, accessible interfaces that feel fast and effortless to use.",
@@ -33,7 +33,7 @@ export { jobs };
 
 export default function CareersPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-x-hidden w-full blueprint-grid-light">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-x-hidden w-full blueprint-grid-light font-serif">
       {/* Header */}
       <header className="w-full py-4 fixed top-0 left-0 right-0 z-50 pointer-events-none">
         <nav className="mx-auto max-w-5xl px-4 w-full pointer-events-auto">
