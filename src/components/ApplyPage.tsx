@@ -6,12 +6,14 @@ import { jobs } from './CareersPage';
 type FormState = {
   name: string;
   email: string;
-  linkedin_or_portfolio: string;
+  linkedin: string;
+  portfolio: string;
   message: string;
   uses_canva: string;
   twitter: string;
   instagram: string;
-  github: string;
+  tiktok: string;
+  heard_from: string;
 };
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
@@ -26,17 +28,19 @@ export default function ApplyPage() {
   const [form, setForm] = useState<FormState>({
     name: '',
     email: '',
-    linkedin_or_portfolio: '',
+    linkedin: '',
+    portfolio: '',
     message: '',
     uses_canva: '',
     twitter: '',
     instagram: '',
-    github: '',
+    tiktok: '',
+    heard_from: '',
   });
   const [status, setStatus] = useState<SubmitStatus>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
@@ -49,12 +53,14 @@ export default function ApplyPage() {
       role,
       name: form.name.trim(),
       email: form.email.trim(),
-      linkedin_or_portfolio: form.linkedin_or_portfolio.trim() || null,
+      linkedin: form.linkedin.trim() || null,
+      portfolio: form.portfolio.trim() || null,
       message: form.message.trim(),
       uses_canva: isMarketingIntern ? form.uses_canva || null : null,
       twitter: form.twitter.trim() || null,
       instagram: form.instagram.trim() || null,
-      github: form.github.trim() || null,
+      tiktok: form.tiktok.trim() || null,
+      heard_from: form.heard_from || null,
     });
 
     if (error) {
@@ -163,19 +169,35 @@ export default function ApplyPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-medium text-text-muted-light" htmlFor="linkedin_or_portfolio">
-                  LinkedIn or portfolio URL
-                </label>
-                <input
-                  id="linkedin_or_portfolio"
-                  name="linkedin_or_portfolio"
-                  type="url"
-                  value={form.linkedin_or_portfolio}
-                  onChange={handleChange}
-                  placeholder="https://linkedin.com/in/..."
-                  className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-navy placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-medium text-text-muted-light" htmlFor="linkedin">
+                    LinkedIn URL
+                  </label>
+                  <input
+                    id="linkedin"
+                    name="linkedin"
+                    type="url"
+                    value={form.linkedin}
+                    onChange={handleChange}
+                    placeholder="https://linkedin.com/in/..."
+                    className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-navy placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-medium text-text-muted-light" htmlFor="portfolio">
+                    Portfolio URL
+                  </label>
+                  <input
+                    id="portfolio"
+                    name="portfolio"
+                    type="url"
+                    value={form.portfolio}
+                    onChange={handleChange}
+                    placeholder="https://yourportfolio.com"
+                    className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-navy placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                  />
+                </div>
               </div>
 
               <div className="flex flex-col gap-3">
@@ -206,13 +228,13 @@ export default function ApplyPage() {
                     />
                   </div>
                   <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary transition">
-                    <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">GitHub</span>
+                    <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">TikTok</span>
                     <input
-                      name="github"
+                      name="tiktok"
                       type="text"
-                      value={form.github}
+                      value={form.tiktok}
                       onChange={handleChange}
-                      placeholder="@username"
+                      placeholder="@handle"
                       className="flex-1 text-sm text-navy placeholder:text-gray-400 bg-transparent focus:outline-none"
                     />
                   </div>
@@ -249,6 +271,29 @@ export default function ApplyPage() {
                   </div>
                 </div>
               )}
+
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-text-muted-light" htmlFor="heard_from">
+                  Where did you hear about us? <span className="text-primary">*</span>
+                </label>
+                <select
+                  id="heard_from"
+                  name="heard_from"
+                  required
+                  value={form.heard_from}
+                  onChange={handleChange}
+                  className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-navy focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                >
+                  <option value="" disabled>Select an option</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="Twitter / X">Twitter / X</option>
+                  <option value="TikTok">TikTok</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="Friend or referral">Friend or referral</option>
+                  <option value="Google / Search">Google / Search</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
 
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-medium text-text-muted-light" htmlFor="message">
