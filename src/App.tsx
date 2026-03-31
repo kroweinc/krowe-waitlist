@@ -1,19 +1,34 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
-import CareersPage from './components/CareersPage';
-import ApplyPage from './components/ApplyPage';
-import PrivacyPage from './components/PrivacyPage';
-import TermsPage from './components/TermsPage';
+
+const LandingPage = lazy(() => import('./components/LandingPage'));
+const CareersPage = lazy(() => import('./components/CareersPage'));
+const ApplyPage = lazy(() => import('./components/ApplyPage'));
+const PrivacyPage = lazy(() => import('./components/PrivacyPage'));
+const TermsPage = lazy(() => import('./components/TermsPage'));
+
+function RouteFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-slate-950">
+      <div
+        className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500/30 border-t-cyan-400"
+        aria-hidden
+      />
+    </div>
+  );
+}
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/careers" element={<CareersPage />} />
-      <Route path="/careers/apply" element={<ApplyPage />} />
-      <Route path="/privacy" element={<PrivacyPage />} />
-      <Route path="/terms" element={<TermsPage />} />
-    </Routes>
+    <Suspense fallback={<RouteFallback />}>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/careers" element={<CareersPage />} />
+        <Route path="/careers/apply" element={<ApplyPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+      </Routes>
+    </Suspense>
   );
 }
 
