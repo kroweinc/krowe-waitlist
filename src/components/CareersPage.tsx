@@ -15,7 +15,7 @@ const jobs = [
     ],
   },
   {
-    title: 'Frontend / UI & UX Engineer',
+    title: 'Frontend / UI & UX Developer',
     type: 'Full-time · Remote',
     description:
       "Own the visual and interactive experience of the Krowe platform. You'll translate product requirements into polished, accessible interfaces that feel fast and effortless to use.",
