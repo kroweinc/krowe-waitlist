@@ -1,35 +1,34 @@
-import { useState } from 'react';
-import Navbar from './components/Navbar';
-import { Hero } from './components/Hero';
-import Features from './components/How it works';
-import Benfits from './components/Benfits';
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-import Footer from './components/footer';
-import KroweHelpdeskFAQ from './components/faq';
-import { WaitlistModal } from './components/WaitlistModal';
+const LandingPage = lazy(() => import('./components/LandingPage'));
+const CareersPage = lazy(() => import('./components/CareersPage'));
+const ApplyPage = lazy(() => import('./components/ApplyPage'));
+const PrivacyPage = lazy(() => import('./components/PrivacyPage'));
+const TermsPage = lazy(() => import('./components/TermsPage'));
+
+function RouteFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-slate-950">
+      <div
+        className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500/30 border-t-cyan-400"
+        aria-hidden
+      />
+    </div>
+  );
+}
 
 function App() {
-  const [waitlistOpen, setWaitlistOpen] = useState(false);
-  const onJoinWaitlist = () => setWaitlistOpen(true);
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-x-hidden w-full">
-      <WaitlistModal open={waitlistOpen} onOpenChange={setWaitlistOpen} />
-      <Navbar onJoinWaitlist={onJoinWaitlist} />
-      <section id="home">
-        <Hero onJoinWaitlist={onJoinWaitlist} />
-      </section>
-      <section id="features">
-        <Features />
-      </section>
-      <section id="why-krowe">
-        <Benfits onJoinWaitlist={onJoinWaitlist} />
-      </section>
-      <section id="faq">
-        <KroweHelpdeskFAQ />
-      </section>
-      <Footer onJoinWaitlist={onJoinWaitlist} />
-    </div>
+    <Suspense fallback={<RouteFallback />}>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/careers" element={<CareersPage />} />
+        <Route path="/careers/apply" element={<ApplyPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+      </Routes>
+    </Suspense>
   );
 }
 

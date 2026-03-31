@@ -48,8 +48,13 @@ const tickets: Ticket[] = [
         id: 3,
         tag: "ROADMAP",
         question: "What does Krowe actually give me?",
-        answer: "After you describe your idea, Krowe delivers a tailored report: market fit assessment, risk breakdown, an MVP path, and a prioritized task list to start executing.",
-        bullets: ["Market fit and competitive landscape", "Clear MVP scope — no feature bloat", "Prioritized tasks so you know what's first"],
+        answer:
+            "After you describe your idea and (optionally) upload customer interviews, Krowe delivers a decision report: what to build, why it matters, and exactly how to execute.",
+        bullets: [
+            "Clear “what to build” decision backed by real user problems",
+            "Dev-ready specs — features, user flows, edge cases",
+            "Prioritized build path so you know exactly what to do next",
+        ],
         minutesToRead: 2,
         updatedLabel: "Updated recently",
         relatedIds: [4, 1, 5],
