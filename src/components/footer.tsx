@@ -95,8 +95,8 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 w-full md:w-auto">
                         <div className="flex items-center justify-center flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-slate-400">
                             <a className="hover:text-primary transition-colors" href="/careers">Careers</a>
-                            <a className="hover:text-primary transition-colors" href="#">Privacy</a>
-                            <a className="hover:text-primary transition-colors" href="#">Terms</a>
+                            <a className="hover:text-primary transition-colors" href="/privacy">Privacy</a>
+                            <a className="hover:text-primary transition-colors" href="/terms">Terms</a>
                             <a className="hover:text-primary transition-colors" href="#">Contact</a>
                         </div>
                         <div className="flex items-center gap-4">

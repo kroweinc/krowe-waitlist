@@ -12,6 +12,8 @@ type FormState = {
   uses_canva: string;
   twitter: string;
   github: string;
+  instagram: string;
+  tiktok: string;
   heard_from: string;
 };
 
@@ -36,6 +38,8 @@ export default function ApplyPage() {
     uses_canva: '',
     twitter: '',
     github: '',
+    instagram: '',
+    tiktok: '',
     heard_from: '',
   });
   const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -99,8 +103,10 @@ export default function ApplyPage() {
       portfolio: form.portfolio.trim() || null,
       message: form.message.trim(),
       uses_canva: isMarketingIntern ? form.uses_canva || null : null,
-      twitter: form.twitter.trim() || null,
-      github: form.github.trim() || null,
+      twitter: isMarketingIntern ? null : form.twitter.trim() || null,
+      github: isMarketingIntern ? null : form.github.trim() || null,
+      instagram: isMarketingIntern ? form.instagram.trim() || null : null,
+      tiktok: isMarketingIntern ? form.tiktok.trim() || null : null,
       heard_from: form.heard_from || null,
       resume_url,
     });
@@ -248,28 +254,57 @@ export default function ApplyPage() {
                   Social profiles <span className="font-normal opacity-60">(optional)</span>
                 </p>
                 <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary transition">
-                    <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">Twitter / X</span>
-                    <input
-                      name="twitter"
-                      type="text"
-                      value={form.twitter}
-                      onChange={handleChange}
-                      placeholder="@handle"
-                      className="flex-1 text-sm text-navy placeholder:text-gray-400 bg-transparent focus:outline-none"
-                    />
-                  </div>
-                  <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary transition">
-                    <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">GitHub</span>
-                    <input
-                      name="github"
-                      type="text"
-                      value={form.github}
-                      onChange={handleChange}
-                      placeholder="username"
-                      className="flex-1 text-sm text-navy placeholder:text-gray-400 bg-transparent focus:outline-none"
-                    />
-                  </div>
+                  {isMarketingIntern ? (
+                    <>
+                      <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary transition">
+                        <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">Instagram</span>
+                        <input
+                          name="instagram"
+                          type="text"
+                          value={form.instagram}
+                          onChange={handleChange}
+                          placeholder="@handle"
+                          className="flex-1 text-sm text-navy placeholder:text-gray-400 bg-transparent focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary transition">
+                        <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">TikTok</span>
+                        <input
+                          name="tiktok"
+                          type="text"
+                          value={form.tiktok}
+                          onChange={handleChange}
+                          placeholder="@handle"
+                          className="flex-1 text-sm text-navy placeholder:text-gray-400 bg-transparent focus:outline-none"
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary transition">
+                        <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">Twitter / X</span>
+                        <input
+                          name="twitter"
+                          type="text"
+                          value={form.twitter}
+                          onChange={handleChange}
+                          placeholder="@handle"
+                          className="flex-1 text-sm text-navy placeholder:text-gray-400 bg-transparent focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary transition">
+                        <span className="text-xs font-medium text-text-muted-light w-20 flex-shrink-0">GitHub</span>
+                        <input
+                          name="github"
+                          type="text"
+                          value={form.github}
+                          onChange={handleChange}
+                          placeholder="username"
+                          className="flex-1 text-sm text-navy placeholder:text-gray-400 bg-transparent focus:outline-none"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 
