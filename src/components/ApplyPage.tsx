@@ -20,7 +20,7 @@ type FormState = {
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
 
 const MAX_RESUME_SIZE = 5 * 1024 * 1024; // 5 MB
-const ALLOWED_RESUME_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+const PDF_TYPE = 'application/pdf';
 
 export default function ApplyPage() {
   const [searchParams] = useSearchParams();
@@ -55,8 +55,8 @@ export default function ApplyPage() {
     const file = e.target.files?.[0] ?? null;
     setResumeError('');
     if (!file) { setResumeFile(null); return; }
-    if (!ALLOWED_RESUME_TYPES.includes(file.type)) {
-      setResumeError('Only PDF, DOC, or DOCX files are accepted.');
+    if (file.type !== PDF_TYPE) {
+      setResumeError('Only PDF files are accepted.');
       setResumeFile(null);
       return;
     }
@@ -70,29 +70,32 @@ export default function ApplyPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setStatus('loading');
     setErrorMsg('');
+    setResumeError('');
 
-    let resume_url: string | null = null;
-
-    if (resumeFile) {
-      const ext = resumeFile.name.split('.').pop();
-      const folder = role.replace(/[^a-z0-9]/gi, '_');
-      const path = `${folder}/${Date.now()}_${form.email.trim().replace(/[^a-z0-9]/gi, '_')}.${ext}`;
-      const { error: uploadError } = await supabase.storage
-        .from('resumes')
-        .upload(path, resumeFile, { contentType: resumeFile.type });
-
-      if (uploadError) {
-        console.error('Resume upload error:', uploadError);
-        setStatus('error');
-        setErrorMsg('Failed to upload resume. Please try again.');
-        return;
-      }
-
-      const { data: urlData } = supabase.storage.from('resumes').getPublicUrl(path);
-      resume_url = urlData.publicUrl;
+    if (!resumeFile || resumeFile.type !== PDF_TYPE) {
+      setResumeError('Please upload your resume as a PDF.');
+      return;
     }
+
+    setStatus('loading');
+
+    const ext = resumeFile.name.split('.').pop() || 'pdf';
+    const folder = role.replace(/[^a-z0-9]/gi, '_');
+    const path = `${folder}/${Date.now()}_${form.email.trim().replace(/[^a-z0-9]/gi, '_')}.${ext}`;
+    const { error: uploadError } = await supabase.storage
+      .from('resumes')
+      .upload(path, resumeFile, { contentType: resumeFile.type });
+
+    if (uploadError) {
+      console.error('Resume upload error:', uploadError);
+      setStatus('error');
+      setErrorMsg('Failed to upload resume. Please try again.');
+      return;
+    }
+
+    const { data: urlData } = supabase.storage.from('resumes').getPublicUrl(path);
+    const resume_url = urlData.publicUrl;
 
     const table = isMarketingIntern ? 'marketing_applications' : 'frontend_applications';
     const { error } = await supabase.from(table).insert({
@@ -311,7 +314,8 @@ export default function ApplyPage() {
               {/* Resume upload */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-medium text-text-muted-light" htmlFor="resume">
-                  Resume <span className="font-normal opacity-60">(optional · PDF, DOC, DOCX · max 5 MB)</span>
+                  Resume (PDF) <span className="text-primary">*</span>{' '}
+                  <span className="font-normal opacity-60">(max 5 MB)</span>
                 </label>
                 <label
                   htmlFor="resume"
@@ -330,7 +334,8 @@ export default function ApplyPage() {
                   <input
                     id="resume"
                     type="file"
-                    accept=".pdf,.doc,.docx"
+                    accept=".pdf,application/pdf"
+                    required
                     onChange={handleResumeChange}
                     className="sr-only"
                   />
