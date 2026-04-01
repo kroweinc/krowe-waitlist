@@ -15,8 +15,8 @@ const jobs = [
     ],
   },
   {
-    title: 'Frontend / UI & UX Developer',
-    type: 'Full-time · Remote',
+    title: 'Frontend / UI & UX Intern',
+    type: 'Internship · Remote',
     description:
       "Own the visual and interactive experience of the Krowe platform. You'll translate product requirements into polished, accessible interfaces that feel fast and effortless to use.",
     responsibilities: [
