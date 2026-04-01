@@ -27,7 +27,7 @@ export default function ApplyPage() {
   const role = searchParams.get('role') ?? '';
   const job = jobs.find((j) => j.title === role);
 
-  const isMarketingIntern = role === 'Marketing Intern';
+  const isMarketingIntern = role === 'Marketing Intern' || role === 'Growth Intern';
 
   const [form, setForm] = useState<FormState>({
     name: '',
