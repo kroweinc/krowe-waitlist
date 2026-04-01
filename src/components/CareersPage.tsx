@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const jobs = [
   {
-    title: 'Marketing Intern',
+    title: 'Growth Intern',
     type: 'Internship · Remote',
     description:
       "Help us grow the Krowe brand from the ground up. You'll work directly with the founding team to craft messaging, run campaigns, and shape how the world first hears about us.",
