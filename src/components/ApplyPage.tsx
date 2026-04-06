@@ -21,6 +21,7 @@ type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
 
 const MAX_RESUME_SIZE = 5 * 1024 * 1024; // 5 MB
 const PDF_TYPE = 'application/pdf';
+const APPLICATIONS_OPEN = false;
 
 export default function ApplyPage() {
   const [searchParams] = useSearchParams();
@@ -46,6 +47,43 @@ export default function ApplyPage() {
   const [resumeError, setResumeError] = useState('');
   const [status, setStatus] = useState<SubmitStatus>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+
+  if (!APPLICATIONS_OPEN) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-x-hidden w-full blueprint-grid-light font-serif">
+        <header className="w-full py-4 fixed top-0 left-0 right-0 z-50 pointer-events-none">
+          <nav className="mx-auto max-w-5xl px-4 w-full pointer-events-auto">
+            <div className="bg-surface-light backdrop-blur-md bg-opacity-80 border border-gray-200 rounded-full px-6 py-3 shadow-soft flex items-center justify-between">
+              <Link to="/">
+                <img src="/KroweLogo.png" alt="Krowe Logo" width={100} height={100} />
+              </Link>
+              <Link
+                to="/careers"
+                className="text-sm font-medium text-text-muted-light hover:text-primary transition-colors flex items-center gap-1"
+              >
+                <span>←</span>
+                <span>Back to careers</span>
+              </Link>
+            </div>
+          </nav>
+        </header>
+        <div className="h-20" />
+        <div className="glow-line-light" />
+        <section className="max-w-2xl mx-auto px-6 pt-16 pb-24 text-center">
+          <div className="glass-panel rounded-2xl p-12 shadow-card">
+            <h2 className="text-2xl font-bold text-navy mb-3">Applications are currently closed</h2>
+            <p className="text-sm text-text-muted-light mb-8">Check back soon for new openings.</p>
+            <Link
+              to="/careers"
+              className="inline-flex items-center justify-center bg-primary text-white text-sm font-semibold py-2.5 px-6 rounded-xl hover:opacity-90 transition-opacity"
+            >
+              Back to Careers
+            </Link>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
