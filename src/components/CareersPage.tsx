@@ -72,12 +72,8 @@ export default function CareersPage() {
           {jobs.map((job) => (
             <div key={job.title} className="glass-panel rounded-2xl p-8 shadow-card flex flex-col gap-5">
               <div className="flex items-center gap-3">
-                <span className="flex items-center gap-1.5 bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-full">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                  </span>
-                  Open
+                <span className="flex items-center gap-1.5 bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-full">
+                  Applications Closed
                 </span>
                 <span className="text-xs text-text-muted-light">{job.type}</span>
               </div>
@@ -94,12 +90,12 @@ export default function CareersPage() {
                 ))}
               </ul>
 
-              <Link
-                to={`/careers/apply?role=${encodeURIComponent(job.title)}`}
-                className="mt-2 w-full inline-flex items-center justify-center bg-primary text-white text-sm font-semibold py-3 px-6 rounded-xl hover:opacity-90 transition-opacity"
+              <button
+                disabled
+                className="mt-2 w-full inline-flex items-center justify-center bg-gray-200 text-gray-400 text-sm font-semibold py-3 px-6 rounded-xl opacity-50 cursor-not-allowed"
               >
-                Apply now
-              </Link>
+                Applications Closed
+              </button>
             </div>
           ))}
         </div>
