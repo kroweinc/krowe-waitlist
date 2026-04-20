@@ -19,7 +19,6 @@ const inputClassName = cn(
 
 export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
   const [email, setEmail] = useState("")
-  const [startupStatus, setStartupStatus] = useState("")
   const [referralSource, setReferralSource] = useState("")
   const [referralSourceOther, setReferralSourceOther] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
@@ -35,12 +34,6 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
     if (!emailRegex.test(trimmed)) {
       setStatus("error")
       setErrorMessage("Please enter a valid email address.")
-      return
-    }
-
-    if (!startupStatus) {
-      setStatus("error")
-      setErrorMessage("Please select whether you have a startup.")
       return
     }
 
@@ -62,7 +55,6 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
     try {
       const { error } = await supabase.from("waitlist").insert({
         email: trimmed,
-        has_idea: startupStatus || null,
         heard_from: referralSource || null,
         heard_from_other: referralSource === "Other" ? referralSourceOther.trim() : null,
       })
@@ -86,7 +78,6 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
 
       setStatus("success")
       setEmail("")
-      setStartupStatus("")
       setReferralSource("")
       setReferralSourceOther("")
       setTimeout(() => {
@@ -106,7 +97,6 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
       setStatus("idle")
       setErrorMessage("")
       setEmail("")
-      setStartupStatus("")
       setReferralSource("")
       setReferralSourceOther("")
     }
@@ -159,24 +149,6 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
               </div>
 
               <div>
-                <label htmlFor="waitlist-startup" className="block text-sm font-medium text-gray-700 mb-1">
-                  Do you have a startup?
-                </label>
-                <select
-                  id="waitlist-startup"
-                  value={startupStatus}
-                  onChange={(e) => setStartupStatus(e.target.value)}
-                  disabled={status === "loading"}
-                  className={inputClassName}
-                >
-                  <option value="">Select an option</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                  <option value="Just an idea">Just an idea</option>
-                </select>
-              </div>
-
-              <div>
                 <label htmlFor="waitlist-referral" className="block text-sm font-medium text-gray-700 mb-1">
                   Where did you hear from us?
                 </label>
@@ -191,6 +163,8 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
                   <option value="TikTok">TikTok</option>
                   <option value="Instagram">Instagram</option>
                   <option value="LinkedIn">LinkedIn</option>
+                  <option value="Reddit">Reddit</option>
+                  <option value="X">X (Twitter)</option>
                   <option value="Word of mouth">Word of mouth</option>
                   <option value="Other">Other</option>
                 </select>
