@@ -165,6 +165,7 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
                   <option value="LinkedIn">LinkedIn</option>
                   <option value="Reddit">Reddit</option>
                   <option value="X">X (Twitter)</option>
+                  <option value="Newsletter">Newsletter</option>
                   <option value="Word of mouth">Word of mouth</option>
                   <option value="Other">Other</option>
                 </select>
