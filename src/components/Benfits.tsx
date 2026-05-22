@@ -1,79 +1,47 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useCallback } from "react"
 import { cn } from "../lib/utils"
 import { motion } from "framer-motion"
-import { AlertTriangle, Quote, Layers } from "lucide-react"
+import { DashboardCard } from "./dashboard-card"
 
-// Typing animation hook
-function useTypingEffect(text: string, speed = 30, trigger = true) {
-    const [displayedText, setDisplayedText] = useState("")
-    const [isTyping, setIsTyping] = useState(false)
-
-    useEffect(() => {
-        if (!trigger) {
-            setDisplayedText("")
-            return
-        }
-
-        setIsTyping(true)
-        setDisplayedText("")
-        let i = 0
-
-        const interval = setInterval(() => {
-            if (i < text.length) {
-                setDisplayedText(text.slice(0, i + 1))
-                i++
-            } else {
-                setIsTyping(false)
-                clearInterval(interval)
-            }
-        }, speed)
-
-        return () => clearInterval(interval)
-    }, [text, speed, trigger])
-
-    return { displayedText, isTyping }
-}
-
-// Tab content data
-const directionOptions = {
-    build: {
-        label: "Build",
-        badge: "Ready to Build",
+const statusOptions = {
+    onTrack: {
+        label: "On Track",
+        badge: "Running Smoothly",
         badgeColor: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
-        explanation: "Your interviews show clear pain + willingness to pay. The problem is real — build it.",
+        explanation: "Active clients are progressing on schedule. All deliverables have been acknowledged.",
         reasons: [
-            "Pain mentioned in 9 of 12 interviews",
-            "3 buyers asked about pricing",
-            "Scope is achievable in 6–8 weeks",
+            "3 of 4 clients responded within 24 hrs",
+            "No overdue items across active workspaces",
+            "Next milestone confirmed for all accounts",
         ],
     },
-    niche: {
-        label: "Niche Down",
-        badge: "Needs Focus",
+    atRisk: {
+        label: "At Risk",
+        badge: "Needs Attention",
         badgeColor: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-        explanation: "Strong signal, but scattered across buyer types. Narrow your ICP before building.",
+        explanation: "One or more clients have open comments or overdue deliverables that need a follow-up.",
         reasons: [
-            "Pain resonates but buyers vary widely",
-            "No single ICP emerged from transcripts",
-            "Narrowing will unlock faster traction",
+            "Ridge Media has 2 unanswered comments",
+            "Acme Co. deliverable is 3 days overdue",
+            "FounderOS kickoff hasn't been scheduled",
         ],
     },
-    pivot: {
-        label: "Pivot",
-        badge: "Shift Angle",
-        badgeColor: "bg-rose-500/10 text-rose-600 border-rose-500/20",
-        explanation: "Your interviews surfaced a more pressing adjacent problem. Shift angle — don't restart.",
+    completed: {
+        label: "Delivered",
+        badge: "Signed Off",
+        badgeColor: "bg-primary/10 text-primary border-primary/20",
+        explanation: "Scope completed and signed off. Client approved the final deliverable.",
         reasons: [
-            "Adjacent pain came up 8x unprompted",
-            "Current angle has high execution risk",
-            "Interviews point to a clearer opportunity",
+            "Final assets uploaded and acknowledged",
+            "Client left a 5-star review",
+            "Invoice marked paid",
         ],
     },
 }
 
-const tabs = ["Insights", "Decisions", "Specs"] as const
+const tabs = ["Activity", "Delivery", "Conversations"] as const
 type TabType = (typeof tabs)[number]
 
 interface DecisionConsoleBenefitsProps {
@@ -81,12 +49,9 @@ interface DecisionConsoleBenefitsProps {
 }
 
 export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionConsoleBenefitsProps) {
-    const [activeTab, setActiveTab] = useState<TabType>("Insights")
-    const [directionChoice, setDirectionChoice] = useState<"build" | "niche" | "pivot">("build")
+    const [activeTab, setActiveTab] = useState<TabType>("Activity")
+    const [statusChoice, setStatusChoice] = useState<"onTrack" | "atRisk" | "completed">("onTrack")
     const [isTransitioning, setIsTransitioning] = useState(false)
-
-    const topProblemText = "Users consistently abandon after being asked to connect their calendar — 11 mentions across 14 interviews."
-    const { displayedText, isTyping } = useTypingEffect(topProblemText, 25, activeTab === "Insights")
 
     const handleTabChange = useCallback(
         (tab: TabType) => {
@@ -100,11 +65,11 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
         [activeTab],
     )
 
-    const handleDirectionChange = useCallback((choice: "build" | "niche" | "pivot") => {
-        setDirectionChoice(choice)
+    const handleStatusChange = useCallback((choice: "onTrack" | "atRisk" | "completed") => {
+        setStatusChoice(choice)
     }, [])
 
-    const currentDirection = directionOptions[directionChoice]
+    const currentStatus = statusOptions[statusChoice]
 
     return (
         <section id="benefits" className="w-full py-24 md:py-32 bg-background">
@@ -115,10 +80,10 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                         Why Krowe
                     </span>
                     <h2 className="font-serif text-foreground text-4xl md:text-6xl tracking-tight leading-[1.1] text-balance mb-4">
-                        From raw interviews to clear decisions.
+                        One workspace for every client relationship.
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Krowe turns hours of raw feedback into structured insights, product decisions, and dev-ready specs — in minutes.
+                        Krowe keeps your delivery, conversations, and client context all in one place — so nothing falls through the cracks.
                     </p>
                 </div>
 
@@ -131,17 +96,17 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                             <span className="w-3 h-3 rounded-full bg-amber-400/80" />
                             <span className="w-3 h-3 rounded-full bg-emerald-400/80" />
                         </div>
-                        <span className="text-sm font-medium text-foreground font-serif">Krowe Console</span>
+                        <span className="text-sm font-medium text-foreground font-serif">Krowe Portal</span>
                         <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2.5 py-1">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            Live Output
+                            Live
                         </span>
                     </div>
 
                     {/* Tabs */}
                     <div className="border-b border-border">
                         <div className="flex justify-center">
-                            <div className="inline-flex" role="tablist" aria-label="Console sections">
+                            <div className="inline-flex" role="tablist" aria-label="Portal sections">
                                 {tabs.map((tab) => (
                                     <button
                                         key={tab}
@@ -171,101 +136,72 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                             isTransitioning ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0",
                         )}
                     >
-                        {/* Insights Tab */}
-                        {activeTab === "Insights" && (
-                            <div id="panel-Insights" role="tabpanel" aria-labelledby="tab-Insights">
+                        {/* Activity Tab */}
+                        {activeTab === "Activity" && (
+                            <div id="panel-Activity" role="tabpanel" aria-labelledby="tab-Activity">
                                 {/* Header row */}
                                 <div className="flex items-center justify-between mb-6">
                                     <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground font-serif">
-                                        Analyzed 12 interviews
+                                        4 active client workspaces
                                     </span>
                                     <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600 bg-gray-100 border border-border rounded-full px-2.5 py-1 font-serif">
-                                        3 min 42 sec
+                                        Updated just now
                                     </span>
                                 </div>
 
-                                {/* Top Problem card */}
-                                <div className="bg-gray-50 border border-border rounded-xl p-4 mb-4">
-                                    <div className="flex items-start gap-3 mb-2">
-                                        <AlertTriangle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
-                                        <p className="text-sm font-semibold text-foreground font-serif">
-                                            Onboarding drop-off after step 2
-                                        </p>
-                                    </div>
-                                    <p className="text-sm text-gray-600 leading-relaxed font-serif min-h-[40px]">
-                                        {displayedText}
-                                        {isTyping && <span className="inline-block w-0.5 h-4 bg-gray-600 ml-0.5 animate-pulse" />}
-                                    </p>
-                                    <p className="text-xs text-amber-600 font-medium mt-2 font-serif">11x · Highest priority</p>
+                                {/* Activity card (full-width) */}
+                                <div className="mb-4">
+                                    <DashboardCard
+                                        type="activity"
+                                        className="w-full"
+                                    />
                                 </div>
 
                                 {/* Two-column row */}
                                 <div className="grid md:grid-cols-2 gap-4">
-                                    {/* Key Quote card */}
-                                    <div className="bg-gray-50 border border-border rounded-xl p-4">
-                                        <div className="flex items-center gap-2 mb-3">
-                                            <Quote className="w-4 h-4 text-primary shrink-0" />
-                                            <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground font-serif">
-                                                Key Quote
-                                            </span>
-                                        </div>
-                                        <p className="text-sm italic text-gray-700 leading-relaxed font-serif mb-2">
-                                            "I knew what it did, I just couldn't get started."
-                                        </p>
-                                        <p className="text-xs text-muted-foreground font-serif">— Sarah, YC Founder</p>
-                                    </div>
-
-                                    {/* Meta Themes card */}
-                                    <div className="bg-gray-50 border border-border rounded-xl p-4">
-                                        <div className="flex items-center gap-2 mb-3">
-                                            <Layers className="w-4 h-4 text-muted-foreground shrink-0" />
-                                            <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground font-serif">
-                                                Meta Themes
-                                            </span>
-                                        </div>
-                                        <ul className="space-y-1.5">
-                                            {[
-                                                "Friction in first-run experience",
-                                                "Unclear value before commitment",
-                                                "Mobile experience gaps",
-                                            ].map((theme) => (
-                                                <li key={theme} className="text-sm text-gray-600 font-serif flex items-start gap-2">
-                                                    <span className="w-1 h-1 rounded-full bg-gray-400 mt-2 shrink-0" />
-                                                    {theme}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                    <DashboardCard
+                                        type="comments"
+                                        data={{
+                                            subtitle: '"The revised scope looks great — ready to proceed."',
+                                            detail: "— Marcus, Ridge Media · 1 hr ago",
+                                            count: "5",
+                                        }}
+                                        className="w-full"
+                                    />
+                                    <DashboardCard
+                                        type="tasks"
+                                        className="w-full"
+                                    />
                                 </div>
                             </div>
                         )}
 
-                        {/* Decisions Tab */}
-                        {activeTab === "Decisions" && (
-                            <div id="panel-Decisions" role="tabpanel" aria-labelledby="tab-Decisions">
+                        {/* Delivery Tab */}
+                        {activeTab === "Delivery" && (
+                            <div id="panel-Delivery" role="tabpanel" aria-labelledby="tab-Delivery">
                                 {/* Label above segmented control */}
                                 <p className="text-center text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
-                                    Krowe's read on your interviews
+                                    Client delivery status
                                 </p>
 
                                 {/* Segmented Control */}
                                 <div className="flex justify-center mb-8">
-                                    <div className="inline-flex p-1 bg-gray-100 rounded-lg" role="radiogroup" aria-label="Direction choice">
-                                        {(["build", "niche", "pivot"] as const).map((option) => (
+                                    <div className="inline-flex p-1 bg-gray-100 rounded-lg" role="radiogroup" aria-label="Status choice">
+                                        {(["onTrack", "atRisk", "completed"] as const).map((option) => (
                                             <button
                                                 key={option}
                                                 role="radio"
-                                                aria-checked={directionChoice === option}
-                                                onClick={() => handleDirectionChange(option)}
+                                                aria-checked={statusChoice === option}
+                                                onClick={() => handleStatusChange(option)}
                                                 className={cn(
                                                     "relative px-5 py-2 text-sm font-serif font-medium rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                                                    directionChoice === option
+                                                    statusChoice === option
                                                         ? "text-black"
                                                         : "text-muted-foreground hover:text-foreground",
                                                 )}
                                             >
-                                                <span className="relative z-10 font-serif">{directionOptions[option].label}</span>
-                                                {directionChoice === option && (
+                                                <span className="relative z-10 font-serif">{statusOptions[option].label}</span>
+                                                {statusChoice === option && (
                                                     <motion.span
                                                         layoutId="active-pill"
                                                         className="absolute inset-0 bg-white rounded-md shadow-sm"
@@ -277,22 +213,22 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                                     </div>
                                 </div>
 
-                                {/* Decision Badge */}
+                                {/* Status Badge */}
                                 <div className="flex justify-center mb-6">
                                     <span
                                         className={cn(
                                             "inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all",
-                                            currentDirection.badgeColor,
+                                            currentStatus.badgeColor,
                                         )}
                                     >
-                                        {currentDirection.badge}
+                                        {currentStatus.badge}
                                     </span>
                                 </div>
 
                                 {/* Explanation */}
                                 <div className="text-center mb-8">
                                     <p className="text-base md:text-lg text-black font-medium min-h-[28px] font-serif">
-                                        {currentDirection.explanation}
+                                        {currentStatus.explanation}
                                     </p>
                                 </div>
 
@@ -301,15 +237,15 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                                     {/* Left Column */}
                                     <div>
                                         <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
-                                            Signals from interviews
+                                            Active clients
                                         </h4>
                                         <div className="flex flex-wrap gap-2">
-                                            {["Pain frequency", "Buyer specificity", "Willingness to pay"].map((chip) => (
+                                            {["Acme Co.", "Ridge Media", "FounderOS"].map((client) => (
                                                 <span
-                                                    key={chip}
+                                                    key={client}
                                                     className="inline-flex items-center px-3 py-1.5 text-sm font-medium bg-gray-100 text-gray-900 rounded-full font-serif"
                                                 >
-                                                    {chip}
+                                                    {client}
                                                 </span>
                                             ))}
                                         </div>
@@ -318,10 +254,10 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                                     {/* Right Column */}
                                     <div>
                                         <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
-                                            Why this decision
+                                            Status breakdown
                                         </h4>
                                         <ul className="space-y-2.5 list-disc pl-5">
-                                            {currentDirection.reasons.map((reason, i) => (
+                                            {currentStatus.reasons.map((reason, i) => (
                                                 <li key={i} className="text-sm text-gray-500 font-medium font-serif">
                                                     {reason}
                                                 </li>
@@ -332,94 +268,72 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                             </div>
                         )}
 
-                        {/* Specs Tab */}
-                        {activeTab === "Specs" && (
-                            <div id="panel-Specs" role="tabpanel" aria-labelledby="tab-Specs">
+                        {/* Conversations Tab */}
+                        {activeTab === "Conversations" && (
+                            <div id="panel-Conversations" role="tabpanel" aria-labelledby="tab-Conversations">
                                 {/* Header */}
                                 <p className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-6 font-serif">
-                                    Generated from your interviews
+                                    Threads across your workspaces
                                 </p>
 
-                                {/* Two-column spec preview */}
+                                {/* Two-column conversation preview */}
                                 <div className="grid md:grid-cols-2 gap-6 mb-8">
-                                    {/* Feature Specs */}
+                                    {/* Client messages */}
                                     <div>
                                         <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
-                                            Feature Specs
+                                            Open threads
                                         </h4>
                                         <div className="space-y-3">
-                                            {[
-                                                { text: "Skip calendar connect — offer manual entry fallback", priority: "High" },
-                                                { text: "Add progress indicator showing steps remaining", priority: "High" },
-                                                { text: "Surface core value before asking for permissions", priority: "Med" },
-                                            ].map((spec, i) => (
-                                                <div key={i} className="flex items-start gap-3">
-                                                    <div className="w-4 h-4 rounded border border-border mt-0.5 shrink-0" />
-                                                    <p className="text-sm text-gray-700 font-serif flex-1">{spec.text}</p>
-                                                    <span
-                                                        className={cn(
-                                                            "text-xs font-medium px-2 py-0.5 rounded-full shrink-0 font-serif",
-                                                            spec.priority === "High"
-                                                                ? "bg-rose-500/10 text-rose-600"
-                                                                : "bg-gray-100 text-gray-600",
-                                                        )}
-                                                    >
-                                                        {spec.priority}
-                                                    </span>
-                                                </div>
-                                            ))}
+                                            <DashboardCard
+                                                type="comments"
+                                                data={{
+                                                    subtitle: '"Can we revisit the timeline for phase 2?"',
+                                                    detail: "— Priya, Acme Co. · 3 hrs ago",
+                                                    count: "2",
+                                                }}
+                                                className="w-full"
+                                            />
+                                            <DashboardCard
+                                                type="comments"
+                                                data={{
+                                                    subtitle: '"Logo files look perfect. Approved."',
+                                                    detail: "— Jordan, Ridge Media · Yesterday",
+                                                    count: "1",
+                                                }}
+                                                className="w-full"
+                                            />
                                         </div>
                                     </div>
 
-                                    {/* Edge Cases */}
+                                    {/* Operator view */}
                                     <div>
                                         <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
-                                            Edge Cases
+                                            Your workspace
                                         </h4>
                                         <div className="space-y-3">
-                                            {[
-                                                "User has no existing calendar tool",
-                                                "First session on mobile device",
-                                                "Team account with multiple users",
-                                            ].map((edgeCase, i) => (
-                                                <div key={i} className="flex items-start gap-3">
-                                                    <span className="w-2 h-2 rounded-full bg-amber-400 mt-1.5 shrink-0" />
-                                                    <p className="text-sm text-gray-600 font-serif">{edgeCase}</p>
-                                                </div>
-                                            ))}
+                                            <DashboardCard
+                                                type="delivery"
+                                                data={{
+                                                    subtitle: "Website Redesign — Final Review",
+                                                    detail: "Awaiting client sign-off",
+                                                }}
+                                                className="w-full"
+                                            />
+                                            <DashboardCard
+                                                type="milestone"
+                                                data={{
+                                                    subtitle: "Brand Launch",
+                                                    detail: "In 5 days",
+                                                }}
+                                                className="w-full"
+                                            />
                                         </div>
-                                    </div>
-                                </div>
-
-                                {/* User Flow preview */}
-                                <div className="mb-6">
-                                    <h4 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground mb-4 font-serif">
-                                        User Flow
-                                    </h4>
-                                    <div className="flex items-center gap-2 flex-wrap">
-                                        {["Sign Up", "Onboarding"].map((step) => (
-                                            <span
-                                                key={step}
-                                                className="inline-flex items-center px-3 py-1.5 text-sm font-medium bg-gray-100 text-gray-700 rounded-full font-serif"
-                                            >
-                                                {step}
-                                            </span>
-                                        ))}
-                                        <span className="text-gray-400">→</span>
-                                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-amber-500/10 text-amber-700 rounded-full font-serif">
-                                            <AlertTriangle className="w-3.5 h-3.5" />
-                                            Drop-off point
-                                        </span>
-                                        <span className="text-gray-400">→</span>
-                                        <span className="inline-flex items-center px-3 py-1.5 text-sm font-medium bg-gray-100 text-gray-700 rounded-full font-serif">
-                                            Core Value
-                                        </span>
                                     </div>
                                 </div>
 
                                 {/* Micro copy */}
                                 <p className="text-sm text-gray-500 font-serif">
-                                    Dev-ready specs from real user signals — no guesswork.
+                                    All client conversations, co-located with your work — no more scattered DMs.
                                 </p>
                             </div>
                         )}
@@ -434,15 +348,15 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
                                     type="button"
                                     onClick={() => onJoinWaitlist?.()}
                                 >
-                                    Analyze my interviews
+                                    Get early access
                                 </button>
                                 <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded font-serif">
-                                    See a sample report
+                                    See a demo
                                 </button>
                             </div>
                         </div>
                         <p className="text-xs text-muted-foreground text-center sm:text-left mt-3">
-                            Upload your first transcript. Results in under 5 minutes.
+                            Set up your first client workspace in under 2 minutes.
                         </p>
                     </div>
                 </div>

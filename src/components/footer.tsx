@@ -18,11 +18,11 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
                     <div className="col-span-12 lg:col-span-8 flex flex-col justify-center">
                         <div className="space-y-2">
                             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tighter leading-none font-serif">
-                                <span className="text-white block whitespace-nowrap">Turn Customer Interviews.</span>
-                                <span className="text-primary block whitespace-nowrap">Into Decisions.</span>
+                                <span className="text-white block whitespace-nowrap">Manage every client.</span>
+                                <span className="text-primary block whitespace-nowrap">All in one place.</span>
                             </h2>
                             <p className="text-slate-400 text-lg font-medium mt-2 max-w-xl pt-4">
-                            The only platform you need to decide what to build next, so you can focus on actually building it.
+                            One workspace for delivery, comments, and conversation — so nothing falls through the cracks.
                             </p>
                         </div>
                     </div>
@@ -56,30 +56,30 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
                 <div className="ticker-animate flex gap-6 px-6 w-max">
                     {/* First Set */}
                     <div className="flex gap-6 items-stretch">
-                        <DashboardCard type="topProblem" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="keyQuote" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="metaThemes" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="featureSpecs" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="edgeCases" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="userFlow" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="clientWorkspace" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="delivery" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="comments" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="activity" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="tasks" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="milestone" variant="dark" className="h-44 w-56" />
                     </div>
                     {/* Second Set (Duplicate for infinite loop) */}
                     <div className="flex gap-6 items-stretch">
-                        <DashboardCard type="topProblem" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="keyQuote" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="metaThemes" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="featureSpecs" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="edgeCases" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="userFlow" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="progress" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="clientWorkspace" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="delivery" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="comments" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="activity" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="tasks" variant="dark" className="h-44 w-56" />
                     </div>
                     {/* Third Set */}
                     <div className="flex gap-6 items-stretch">
-                        <DashboardCard type="topProblem" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="keyQuote" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="metaThemes" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="featureSpecs" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="edgeCases" variant="dark" className="h-44 w-56" />
-                        <DashboardCard type="userFlow" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="milestone" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="progress" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="clientWorkspace" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="delivery" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="comments" variant="dark" className="h-44 w-56" />
+                        <DashboardCard type="activity" variant="dark" className="h-44 w-56" />
                     </div>
                 </div>
             </div>

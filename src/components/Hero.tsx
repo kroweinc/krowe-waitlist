@@ -25,12 +25,12 @@ export function Hero({ onJoinWaitlist }: HeroProps) {
   const effectiveScrollY = Math.min(scrollY, MAX_SCROLL_THRESHOLD)
 
   const cards = [
-    { type: "topProblem" as const,   rotation: -3, x: -380, y: -31,  blur: 2, z: 1 },
-    { type: "keyQuote" as const,     rotation:  2, x:  380, y: -31,  blur: 1, z: 2 },
-    { type: "metaThemes" as const,   rotation: -2, x: -500, y: -250, blur: 3, z: 0 },
-    { type: "featureSpecs" as const, rotation:  3, x:  500, y: -250, blur: 2, z: 1 },
-    { type: "edgeCases" as const,    rotation: -1, x: -500, y:  160, blur: 2, z: 1 },
-    { type: "userFlow" as const,     rotation:  2, x:  500, y:  160, blur: 2, z: 1 },
+    { type: "clientWorkspace" as const, rotation: -3, x: -380, y: -31,  blur: 2, z: 1 },
+    { type: "delivery" as const,        rotation:  2, x:  380, y: -31,  blur: 1, z: 2 },
+    { type: "comments" as const,        rotation: -2, x: -500, y: -250, blur: 3, z: 0 },
+    { type: "activity" as const,        rotation:  3, x:  500, y: -250, blur: 2, z: 1 },
+    { type: "milestone" as const,       rotation: -1, x: -500, y:  160, blur: 2, z: 1 },
+    { type: "progress" as const,        rotation:  2, x:  500, y:  160, blur: 2, z: 1 },
   ]
 
   return (
@@ -54,15 +54,15 @@ export function Hero({ onJoinWaitlist }: HeroProps) {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center min-h-[70vh]">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center min-h-[70vh]">
         <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-foreground text-balance">
-          <span className="sm:whitespace-nowrap">Turn Customer Interviews.</span>
+          <span className="whitespace-nowrap">Build client systems easily</span>
           <br />
-          <span className="text-primary">Into Decisions.</span>
+          <span className="text-primary">all in 1 portal.</span>
         </h1>
 
         <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-           We analyze real user feedback that helps you validate your idea, know when to pivot, and makes dev ready specs.
+          Manage every operator-client in one workspace — delivery, comments, and ongoing conversation co-located with the work.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
