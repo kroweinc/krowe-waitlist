@@ -39,6 +39,14 @@
         background-size: 40px 40px;
     }
 
+    /* Landing page: cream background + blueprint grid (hero through FAQ) */
+    .page-surface {
+        background-color: #FDF9F3;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
     .glow-line-light {
         height: 1px;
         background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 74, 0.35) 50%, transparent 100%);
@@ -73,6 +81,11 @@
         mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     }
 
+    .mask-fade-bottom {
+        -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    }
+
     .ticker-animate {
         animation: ticker 30s linear infinite;
     }
@@ -81,6 +94,28 @@
         font-family: 'Inter', system-ui, sans-serif;
         /* Fallback or ensure font is loaded */
     }
+
+    .hero-mockup-grid {
+        background-image:
+            linear-gradient(to right, hsl(var(--primary) / 0.06) 1px, transparent 1px),
+            linear-gradient(to bottom, hsl(var(--primary) / 0.06) 1px, transparent 1px);
+        background-size: 28px 28px;
+    }
+}
+
+@keyframes kw-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes kw-ping {
+    0% { transform: scale(1); opacity: 0.9; }
+    75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+
+@keyframes kw-fade-in-up {
+    0% { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes ticker {

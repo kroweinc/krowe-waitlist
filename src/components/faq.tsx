@@ -25,69 +25,93 @@ interface Ticket {
 const tickets: Ticket[] = [
     {
         id: 1,
-        tag: "VALIDATION",
-        question: "Is Krowe just another GPT Wrapper?",
+        tag: "CLARITY",
+        question: "What is Krowe?",
         answer:
-            "No. Krowe is a structured system, not a chat window. It takes your idea through analysis, surfaces real risks, and hands you a plan — not a wall of generic text.",
-        bullets: ["Idea analysis with real signal", "Risks flagged before you waste time", "Output is a plan, not a conversation"],
-        minutesToRead: 2,
+            "Krowe is a portal where operators run every client relationship in one place. Delivery, comments, approvals, and the ongoing conversation all live next to the work itself — so nothing gets lost across email, Slack, Loom, and Notion.",
+        bullets: [
+            "One workspace per client, isolated and on-brand",
+            "Live previews of what you're building, not screenshots",
+            "Pinned threads on the actual UI, not a separate doc",
+        ],
+        minutesToRead: 1,
         updatedLabel: "Updated recently",
-        relatedIds: [2, 3, 5],
+        relatedIds: [2, 3, 4],
     },
     {
         id: 2,
-        tag: "CLARITY",
-        question: "Who is Krowe actually built for?",
-        answer: "Krowe is built for early-stage founders — people with an idea (or a half-baked one) who need structure, not a 10-person team or an MBA to move forward.",
-        bullets: ["Solo founders and first-timers", "People with ideas but no clear next step", "Anyone tired of generic startup advice"],
-        minutesToRead: 2,
+        tag: "EXECUTION",
+        question: "What does my client see and do inside Krowe?",
+        answer:
+            "Each client gets their own warm room — a clean workspace where they interact with the live build instead of waiting on screen shares. They upload assets, ask questions, drop click-to-comment notes directly on the UI, and approve milestones without juggling logins or inboxes.",
+        bullets: [
+            "Click anywhere on the live preview to leave a comment",
+            "Reply from email or in-app — both land in the same thread",
+            "Sign off on milestones with one tap, no chasing required",
+        ],
+        minutesToRead: 1,
         updatedLabel: "Updated recently",
-        relatedIds: [1, 6, 3],
+        relatedIds: [1, 3, 6],
     },
     {
         id: 3,
-        tag: "ROADMAP",
-        question: "What does Krowe actually give me?",
+        tag: "VALIDATION",
+        question: "How is Krowe different from Notion, Slack, or Upwork?",
         answer:
-            "After you describe your idea and (optionally) upload customer interviews, Krowe delivers a decision report: what to build, why it matters, and exactly how to execute.",
+            "Notion is a doc you share, Slack is a chat that buries context, and Upwork is a marketplace that ends at the contract. Krowe is the delivery surface — your client sees the actual system, drops comments where the work lives, and approves it without bouncing between five tools.",
         bullets: [
-            "Clear “what to build” decision backed by real user problems",
-            "Dev-ready specs — features, user flows, edge cases",
-            "Prioritized build path so you know exactly what to do next",
+            "Built around the live build, not around documents or chat",
+            "Multi-client by default — every workspace stays isolated",
+            "Replaces four to five tools in the typical client handoff stack",
         ],
         minutesToRead: 2,
         updatedLabel: "Updated recently",
-        relatedIds: [4, 1, 5],
+        relatedIds: [1, 2, 4],
     },
     {
         id: 4,
-        tag: "EXECUTION",
-        question: "How is this different from just using ChatGPT?",
-        answer: "ChatGPT gives you answers. Krowe gives you a system. The difference is structure — Krowe sequences your decisions so you don't skip steps that kill startups.",
-        bullets: ["Built-in founder decision framework", "No prompt engineering required", "Designed around how startups actually fail"],
-        minutesToRead: 2,
+        tag: "ACCESS",
+        question: "Do I need clients lined up before joining the waitlist?",
+        answer:
+            "No. Whether you already have operator-clients or you're just starting to take work on, Krowe scales with you. You can port existing relationships in or stand up your first client workspace from scratch.",
+        bullets: [
+            "Bring current clients over with no migration headaches",
+            "Start fresh with a clean operator workspace",
+            "Add new clients anytime as your book grows",
+        ],
+        minutesToRead: 1,
         updatedLabel: "Updated recently",
-        relatedIds: [1, 3, 5],
+        relatedIds: [1, 5, 6],
     },
     {
         id: 5,
         tag: "PRICING",
-        question: "When will Krowe be available?",
-        answer: "Krowe is in closed early access. Joining the waitlist gets you priority access and early pricing before the public launch.",
-        bullets: ["Waitlist members get first access", "Early pricing locked in at signup", "No credit card required to join"],
+        question: "What does Krowe cost?",
+        answer:
+            "Pricing isn't public yet — we're still in closed early access. Operators who join the waitlist get first access when workspaces open up, plus grandfathered pricing locked in before the public launch.",
+        bullets: [
+            "No card and no demo call to join the waitlist",
+            "Founding operators get locked-in early pricing",
+            "Public pricing announced before general launch",
+        ],
         minutesToRead: 1,
         updatedLabel: "Updated recently",
         relatedIds: [6, 1, 2],
     },
     {
         id: 6,
-        tag: "ACCESS",
-        question: "What do I need to get started?",
-        answer: "Just an idea — rough or refined. Krowe is designed to work with what you have, not what you wish you had. No deck, no co-founder, no prior startup experience needed.",
-        bullets: ["Works with a rough idea or a detailed one", "No technical background required", "Designed for first-time and repeat founders"],
-        minutesToRead: 2,
+        tag: "ROADMAP",
+        question: "When will I actually get access?",
+        answer:
+            "Krowe is in closed early access right now and we're letting operators in as workspaces open up. Your spot is determined by when you join the waitlist and the kind of work you're already doing — the earlier you're on, the sooner you're in.",
+        bullets: [
+            "Priority access for the first wave of operators",
+            "Early access invites going out continuously",
+            "Public launch follows once V1.0 is battle-tested",
+        ],
+        minutesToRead: 1,
         updatedLabel: "Updated recently",
-        relatedIds: [2, 5, 4],
+        relatedIds: [5, 1, 4],
     },
 ]
 
@@ -131,7 +155,7 @@ export function KroweHelpdeskFAQ() {
     }, [])
 
     return (
-        <section className="w-full bg-white py-16 md:py-24">
+        <section className="w-full py-16 md:py-24">
             <div className="mx-auto max-w-[1150px] px-4 sm:px-6">
                 {/* Header */}
                 <div className="mb-8 flex flex-col gap-4 md:mb-10 md:flex-row md:items-end md:justify-between">
@@ -171,7 +195,7 @@ export function KroweHelpdeskFAQ() {
                                     />
                                 ))}
                                 {/* Fade at bottom */}
-                                <div className="pointer-events-none sticky bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent" />
+                                <div className="pointer-events-none sticky bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#FDF9F3] to-transparent" />
                             </div>
                         </div>
 

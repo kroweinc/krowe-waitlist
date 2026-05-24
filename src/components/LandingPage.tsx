@@ -12,7 +12,7 @@ export default function LandingPage() {
   const onJoinWaitlist = () => setWaitlistOpen(true);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-x-hidden w-full">
+    <div className="min-h-screen page-surface overflow-x-hidden w-full">
       <WaitlistModal open={waitlistOpen} onOpenChange={setWaitlistOpen} />
       <Navbar onJoinWaitlist={onJoinWaitlist} />
       <section id="home">
