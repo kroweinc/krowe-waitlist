@@ -40,19 +40,19 @@ export function HowItWorksSection() {
     return (
         <section
             aria-labelledby="how-it-works-heading"
-            className="flex-1 max-w-7xl mx-auto w-full px-6 py-20 relative"
+            className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-16 sm:py-20 relative"
         >
-            <div className="max-w-3xl mx-auto text-center mb-16">
+            <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
                 <h4 className="text-primary text-sm md:text-base font-extrabold tracking-[0.25em] uppercase mb-4">
                     How it works
                 </h4>
                 <h1
                     id="how-it-works-heading"
-                    className="font-serif text-foreground text-4xl md:text-6xl tracking-tight leading-[1.1] mb-6"
+                    className="font-serif text-foreground text-3xl sm:text-4xl md:text-6xl tracking-tight leading-[1.1] mb-6"
                 >
                     Bring every client into <span className="text-primary">one workspace.</span>
                 </h1>
-                <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+                <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto">
                     Clients upload, comment, and sign off. Operators deliver — all in one place.
                 </p>
             </div>

@@ -145,13 +145,15 @@ export function KroweHelpdeskFAQ() {
 
     // Reset mobile view when resizing to desktop
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 768) {
+        const mq = window.matchMedia("(min-width: 768px)")
+        const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
+            if (e.matches) {
                 setMobileView("list")
             }
         }
-        window.addEventListener("resize", handleResize)
-        return () => window.removeEventListener("resize", handleResize)
+        handleChange(mq)
+        mq.addEventListener("change", handleChange)
+        return () => mq.removeEventListener("change", handleChange)
     }, [])
 
     return (

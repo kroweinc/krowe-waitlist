@@ -104,7 +104,7 @@ export function DashboardCard({ type, data, className, showLabel = false, label,
             )}
             <div
                 className={cn(
-                    "w-56 rounded-xl border p-4 shadow-lg hover:shadow-xl transition-all duration-300",
+                    "w-48 sm:w-56 rounded-xl border p-3 sm:p-4 shadow-lg hover:shadow-xl transition-all duration-300",
                     dark
                         ? "bg-white/[0.07] border-white/10 shadow-black/20 hover:border-primary/35"
                         : "bg-card border-border hover:border-primary/20",

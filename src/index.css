@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
     html {
         font-size: 87.5%;
     }
@@ -129,5 +134,11 @@
 
     100% {
         transform: translateX(-33.333%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ticker-animate {
+        animation: none;
     }
 }

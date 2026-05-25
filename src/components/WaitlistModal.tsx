@@ -12,7 +12,7 @@ interface WaitlistModalProps {
 }
 
 const inputClassName = cn(
-  "w-full rounded-lg border border-gray-300 px-4 py-3 text-base transition-colors",
+  "w-full rounded-lg border border-gray-300 px-4 py-2.5 sm:py-3 text-[16px] sm:text-base transition-colors",
   "placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20",
   "disabled:cursor-not-allowed disabled:bg-gray-50 disabled:opacity-70"
 )
@@ -107,9 +107,9 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
-        <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-full max-w-[25rem] translate-x-[-50%] translate-y-[-50%] rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
+        <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-[calc(100%-2rem)] max-w-[25rem] max-h-[calc(100vh-2rem)] overflow-y-auto translate-x-[-50%] translate-y-[-50%] rounded-2xl border border-gray-200 bg-white p-5 sm:p-6 shadow-lg">
           <div className="flex items-start justify-between">
-            <Dialog.Title className="text-xl font-bold text-gray-900 font-serif">
+            <Dialog.Title className="text-lg sm:text-xl font-bold text-gray-900 font-serif">
               Join the waitlist
             </Dialog.Title>
             <Dialog.Close asChild>
@@ -132,7 +132,7 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
               <p className="mt-1 text-sm text-gray-500">We'll be in touch soon.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            <form onSubmit={handleSubmit} className="mt-5 sm:mt-6 space-y-3 sm:space-y-4">
               <div>
                 <label htmlFor="waitlist-email" className="sr-only">
                   Email address
@@ -190,7 +190,7 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
               <Button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full bg-primary text-white hover:bg-primary/90 font-semibold py-6 rounded-lg"
+                className="w-full bg-primary text-white hover:bg-primary/90 font-semibold py-4 sm:py-6 rounded-lg"
               >
                 {status === "loading" ? (
                   <span className="flex items-center justify-center gap-2">

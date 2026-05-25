@@ -13,21 +13,21 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
     return (
         <footer className="relative w-full footer-dark border-t border-white/5 pt-24 pb-8 pb-[max(2rem,env(safe-area-inset-bottom))] antialiased overflow-hidden">
             <div className="absolute top-0 left-0 w-full footer-glow-line z-10" aria-hidden />
-            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
                 <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
                     <div className="col-span-12 lg:col-span-8 flex flex-col justify-center">
                         <div className="space-y-2">
-                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tighter leading-none font-serif">
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tighter leading-none font-serif">
                                 <span className="text-white block whitespace-nowrap">Manage every client.</span>
                                 <span className="text-primary block whitespace-nowrap">All in one place.</span>
                             </h2>
-                            <p className="text-slate-400 text-lg font-medium mt-2 max-w-xl pt-4">
+                            <p className="text-slate-400 text-base sm:text-lg font-medium mt-2 max-w-xl pt-4">
                             One workspace for delivery, comments, and conversation — so nothing falls through the cracks.
                             </p>
                         </div>
                     </div>
                     <div className="col-span-12 lg:col-span-4">
-                        <div className="footer-glass-panel rounded-2xl flex flex-col relative overflow-hidden group w-full p-6 lg:p-8">
+                        <div className="footer-glass-panel rounded-2xl flex flex-col relative overflow-hidden group w-full p-5 sm:p-6 lg:p-8">
                             <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 blur-3xl rounded-full"></div>
                             <div className="mb-8 relative z-10">
                                 <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center mb-6 border border-primary/30">
@@ -52,10 +52,10 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
                 </div>
             </div>
 
-            <div className="mt-20 relative w-full overflow-hidden mask-fade">
-                <div className="ticker-animate flex gap-6 px-6 w-max">
+            <div className="mt-16 sm:mt-20 relative w-full overflow-hidden mask-fade">
+                <div className="ticker-animate flex gap-4 sm:gap-6 px-4 sm:px-6 w-max">
                     {/* First Set */}
-                    <div className="flex gap-6 items-stretch">
+                    <div className="flex gap-4 sm:gap-6 items-stretch">
                         <DashboardCard type="clientWorkspace" variant="dark" className="h-44" />
                         <DashboardCard type="delivery" variant="dark" className="h-44" />
                         <DashboardCard type="comments" variant="dark" className="h-44" />
@@ -64,7 +64,7 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
                         <DashboardCard type="milestone" variant="dark" className="h-44" />
                     </div>
                     {/* Second Set (Duplicate for infinite loop) */}
-                    <div className="flex gap-6 items-stretch">
+                    <div className="flex gap-4 sm:gap-6 items-stretch">
                         <DashboardCard type="progress" variant="dark" className="h-44" />
                         <DashboardCard type="clientWorkspace" variant="dark" className="h-44" />
                         <DashboardCard type="delivery" variant="dark" className="h-44" />
@@ -73,7 +73,7 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
                         <DashboardCard type="tasks" variant="dark" className="h-44" />
                     </div>
                     {/* Third Set */}
-                    <div className="flex gap-6 items-stretch">
+                    <div className="flex gap-4 sm:gap-6 items-stretch">
                         <DashboardCard type="milestone" variant="dark" className="h-44" />
                         <DashboardCard type="progress" variant="dark" className="h-44" />
                         <DashboardCard type="clientWorkspace" variant="dark" className="h-44" />
@@ -84,7 +84,7 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-16 sm:mt-20">
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
                         <div className="flex items-center gap-2">

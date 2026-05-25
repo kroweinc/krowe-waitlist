@@ -21,15 +21,15 @@ function EventRow({ time, type, client, message, delay }: EventRowProps) {
   const chip = EVENT_CHIP_STYLES[type]
   return (
     <div
-      className="flex items-start gap-3 py-2.5 border-b border-white/5 last:border-0 animate-[kw-fade-in-up_500ms_ease-out_both]"
+      className="flex items-start gap-2 sm:gap-3 py-2 sm:py-2.5 border-b border-white/5 last:border-0 animate-[kw-fade-in-up_500ms_ease-out_both] min-w-0"
       style={{ animationDelay: `${delay}ms` }}
     >
-      <span className="font-mono text-[0.625rem] text-white/30 tabular-nums pt-0.5 shrink-0">{time}</span>
+      <span className="hidden sm:inline font-mono text-[0.625rem] text-white/30 tabular-nums pt-0.5 shrink-0">{time}</span>
       <span className={`shrink-0 px-1.5 py-0.5 rounded text-[0.625rem] font-mono uppercase tracking-wide ${chip.bg} ${chip.text}`}>
         {type}
       </span>
-      <span className="font-mono text-[0.625rem] text-primary/80 shrink-0">{client}</span>
-      <span className="text-xs text-white/60 leading-tight">{message}</span>
+      <span className="hidden sm:inline font-mono text-[0.625rem] text-primary/80 shrink-0">{client}</span>
+      <span className="text-[0.6875rem] sm:text-xs text-white/60 leading-tight truncate min-w-0">{message}</span>
     </div>
   )
 }
@@ -97,13 +97,13 @@ export function HeroCommandCenter() {
       {/* top glow sheen */}
       <div className="absolute top-0 left-0 right-0 h-px footer-glow-line opacity-30" />
 
-      <div className="relative z-10 p-5 md:p-7">
+      <div className="relative z-10 p-3 sm:p-5 md:p-7">
         {/* top bar */}
-        <div className="flex items-start justify-between gap-4 mb-5">
+        <div className="flex items-start justify-between gap-3 sm:gap-4 mb-4 sm:mb-5">
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-mono text-xs text-white/30">krowe.portal/</span>
-              <span className="px-2 py-0.5 rounded-md bg-primary/15 border border-primary/25 font-mono text-xs text-primary">
+              <span className="hidden sm:inline font-mono text-xs text-white/30">krowe.portal/</span>
+              <span className="px-2 py-0.5 rounded-md bg-primary/15 border border-primary/25 font-mono text-[0.625rem] sm:text-xs text-primary">
                 acme-co
               </span>
             </div>
@@ -114,8 +114,8 @@ export function HeroCommandCenter() {
               <span className="text-[0.625rem] text-white/40">4 workspaces · live</span>
             </div>
           </div>
-          <div className="flex items-center gap-2 footer-glass-panel rounded-lg px-3 py-1.5 min-w-0">
-            <span className="text-xs text-white/30 flex-1 min-w-0 truncate">Ask anything…</span>
+          <div className="flex items-center gap-2 footer-glass-panel rounded-lg px-2 py-1 sm:px-3 sm:py-1.5 min-w-0">
+            <span className="text-[0.625rem] sm:text-xs text-white/30 flex-1 min-w-0 truncate">Ask anything…</span>
             <kbd className="shrink-0 px-1.5 py-0.5 rounded bg-white/8 border border-white/10 font-mono text-[0.625rem] text-white/40">
               ⌘K
             </kbd>
@@ -123,9 +123,9 @@ export function HeroCommandCenter() {
         </div>
 
         {/* main two-column grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-3 sm:gap-4">
           {/* left — event log */}
-          <div className="footer-glass-panel rounded-2xl p-4">
+          <div className="footer-glass-panel rounded-2xl p-3 sm:p-4">
             <div className="flex items-center justify-between mb-3">
               <span className="font-mono text-[0.6875rem] text-white/50">tail -f /portal</span>
               <span className="text-[0.625rem] uppercase tracking-widest text-white/30">events · today</span>
@@ -141,20 +141,20 @@ export function HeroCommandCenter() {
           {/* right — sidebar */}
           <div className="flex flex-col gap-3">
             {/* this week */}
-            <div className="footer-glass-panel rounded-2xl p-4">
+            <div className="footer-glass-panel rounded-2xl p-3 sm:p-4">
               <p className="text-[0.625rem] uppercase tracking-widest text-white/30 mb-2">This week</p>
               <MetricRow label="Sign-offs"   value="+3"    tone="success" />
               <MetricRow label="Open items"  value="−2"    tone="success" />
               <MetricRow label="Reply time"  value="1.2h"  tone="neutral" />
             </div>
 
-            {/* live API ping */}
-            <div className="footer-glass-panel rounded-2xl p-4">
+            {/* live API ping — hidden on smallest screens for space */}
+            <div className="hidden sm:block footer-glass-panel rounded-2xl p-3 sm:p-4">
               <StatusPing />
             </div>
 
-            {/* integrations */}
-            <div className="footer-glass-panel rounded-2xl p-4">
+            {/* integrations — hidden on smallest screens for space */}
+            <div className="hidden sm:block footer-glass-panel rounded-2xl p-3 sm:p-4">
               <p className="text-[0.625rem] uppercase tracking-widest text-white/30 mb-2.5">Integrations</p>
               <div className="flex flex-wrap gap-2">
                 {['Slack', 'Stripe', 'Loom', 'Drive'].map((name) => (
@@ -169,9 +169,9 @@ export function HeroCommandCenter() {
             </div>
 
             {/* reply time big stat */}
-            <div className="footer-glass-panel rounded-2xl p-4 flex-1">
+            <div className="footer-glass-panel rounded-2xl p-3 sm:p-4 flex-1">
               <p className="text-[0.625rem] uppercase tracking-widest text-white/30 mb-1">Reply time</p>
-              <p className="text-3xl font-bold text-white/90 leading-none">1.2h</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white/90 leading-none">1.2h</p>
               <p className="mt-1 text-xs text-green-400 font-semibold">↓ 36%</p>
             </div>
           </div>
