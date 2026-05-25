@@ -28,7 +28,7 @@ export function Hero({ onJoinWaitlist }: HeroProps) {
           Manage every operator-client in one workspace — delivery, comments, and ongoing conversation co-located with the work.
         </p>
 
-        <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none">
+        <div className="mt-8 sm:mt-10 mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none">
           <Button
             type="button"
             onClick={() => onJoinWaitlist?.()}
