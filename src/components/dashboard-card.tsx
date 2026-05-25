@@ -127,7 +127,7 @@ export function DashboardCard({ type, data, className, showLabel = false, label,
                                     <Icon className="w-4 h-4 text-primary" />
                                     <p className={cn("font-semibold text-xs", tf)}>{content.title}</p>
                                 </div>
-                                <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 text-[10px] font-semibold text-green-400">
+                                <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 text-[0.625rem] font-semibold text-green-400">
                                     <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
                                     {content.detail}
                                 </span>
@@ -140,14 +140,14 @@ export function DashboardCard({ type, data, className, showLabel = false, label,
                                 </div>
                                 <div>
                                     <p className={cn("text-sm font-semibold leading-tight", tb)}>{content.subtitle}</p>
-                                    <p className={cn("text-[10px]", tm)}>{content.items?.length ?? 0} open items</p>
+                                    <p className={cn("text-[0.625rem]", tm)}>{content.items?.length ?? 0} open items</p>
                                 </div>
                             </div>
 
                             {/* open items */}
                             <ul className="flex-1 space-y-1.5">
                                 {content.items?.map((item, i) => (
-                                    <li key={i} className={cn("flex items-center gap-2 text-[11px]", tm)}>
+                                    <li key={i} className={cn("flex items-center gap-2 text-[0.6875rem]", tm)}>
                                         <div className="w-3 h-3 rounded border border-current opacity-40 shrink-0" />
                                         <span className="truncate">{item}</span>
                                     </li>
@@ -157,8 +157,8 @@ export function DashboardCard({ type, data, className, showLabel = false, label,
                             {/* progress */}
                             <div>
                                 <div className="flex justify-between items-center mb-1">
-                                    <span className={cn("text-[10px]", tm)}>Overall progress</span>
-                                    <span className="text-[10px] font-semibold text-primary">{pct}%</span>
+                                    <span className={cn("text-[0.625rem]", tm)}>Overall progress</span>
+                                    <span className="text-[0.625rem] font-semibold text-primary">{pct}%</span>
                                 </div>
                                 <div className={cn("w-full h-1 rounded-full", track)}>
                                     <div
@@ -183,7 +183,7 @@ export function DashboardCard({ type, data, className, showLabel = false, label,
                                     <Icon className="w-4 h-4 text-primary" />
                                     <p className={cn("font-semibold text-xs", tf)}>{content.title}</p>
                                 </div>
-                                <span className="text-[10px] font-semibold text-amber-400 bg-amber-400/10 rounded-full px-1.5 py-0.5">
+                                <span className="text-[0.625rem] font-semibold text-amber-400 bg-amber-400/10 rounded-full px-1.5 py-0.5">
                                     Due soon
                                 </span>
                             </div>
@@ -195,7 +195,7 @@ export function DashboardCard({ type, data, className, showLabel = false, label,
                                 </div>
                                 <div>
                                     <p className={cn("text-sm font-semibold leading-tight", tb)}>{content.subtitle}</p>
-                                    <p className={cn("text-[10px]", tm)}>{content.detail}</p>
+                                    <p className={cn("text-[0.625rem]", tm)}>{content.detail}</p>
                                 </div>
                             </div>
 
@@ -204,7 +204,7 @@ export function DashboardCard({ type, data, className, showLabel = false, label,
                                 {stages.map((stage, i) => {
                                     const done = i < doneCount
                                     return (
-                                        <li key={i} className="flex items-center gap-2 text-[11px]">
+                                        <li key={i} className="flex items-center gap-2 text-[0.6875rem]">
                                             {done
                                                 ? <CheckCircle2 className="w-3 h-3 text-primary shrink-0" />
                                                 : <div className={cn("w-3 h-3 rounded-full border border-current opacity-40 shrink-0", tm)} />
@@ -218,8 +218,8 @@ export function DashboardCard({ type, data, className, showLabel = false, label,
                             {/* progress bar */}
                             <div>
                                 <div className="flex justify-between items-center mb-1">
-                                    <span className={cn("text-[10px]", tm)}>Completion</span>
-                                    <span className="text-[10px] font-semibold text-primary">{pct}%</span>
+                                    <span className={cn("text-[0.625rem]", tm)}>Completion</span>
+                                    <span className="text-[0.625rem] font-semibold text-primary">{pct}%</span>
                                 </div>
                                 <div className={cn("w-full h-1 rounded-full", track)}>
                                     <div className="h-full rounded-full bg-primary" style={{ width: `${pct}%` }} />
@@ -237,7 +237,7 @@ export function DashboardCard({ type, data, className, showLabel = false, label,
                                 <p className={cn("font-semibold text-sm", tf)}>{content.title}</p>
                             </div>
                             {content.count && (
-                                <span className="text-[10px] font-bold text-primary bg-primary/10 rounded-full px-1.5 py-0.5">
+                                <span className="text-[0.625rem] font-bold text-primary bg-primary/10 rounded-full px-1.5 py-0.5">
                                     {content.count} new
                                 </span>
                             )}
@@ -356,8 +356,8 @@ export function DashboardCard({ type, data, className, showLabel = false, label,
                             {pts.length > 1 && (
                                 <div className="mt-1">
                                     <div className="flex justify-between items-center mb-1">
-                                        <span className={cn("text-[10px]", tm)}>Progress</span>
-                                        <span className="text-[10px] font-semibold text-primary">{pct}%</span>
+                                        <span className={cn("text-[0.625rem]", tm)}>Progress</span>
+                                        <span className="text-[0.625rem] font-semibold text-primary">{pct}%</span>
                                     </div>
                                     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="w-full overflow-visible">
                                         <defs>

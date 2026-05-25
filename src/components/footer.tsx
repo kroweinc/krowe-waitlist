@@ -13,7 +13,7 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
     return (
         <footer className="relative w-full footer-dark border-t border-white/5 pt-24 pb-8 pb-[max(2rem,env(safe-area-inset-bottom))] antialiased overflow-hidden">
             <div className="absolute top-0 left-0 w-full footer-glow-line z-10" aria-hidden />
-            <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
                     <div className="col-span-12 lg:col-span-8 flex flex-col justify-center">
                         <div className="space-y-2">
@@ -84,11 +84,11 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
                 </div>
             </div>
 
-            <div className="max-w-[1280px] mx-auto px-6 lg:px-12 mt-20">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-20">
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
                         <div className="flex items-center gap-2">
-                            <img src="KroweIcon.svg" width={35} height={3} alt="" />
+                            <img src="KroweIcon.svg" className="h-9 w-auto" alt="" />
                             <span className="font-bold text-lg text-white font-display">Krowe</span>
                         </div>
                         <p className="text-xs text-slate-500 font-medium">© 2026 Krowe Technologies Inc.</p>

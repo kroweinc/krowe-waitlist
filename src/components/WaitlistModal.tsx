@@ -107,7 +107,7 @@ export function WaitlistModal({ open, onOpenChange }: WaitlistModalProps) {
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
-        <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-full max-w-[400px] translate-x-[-50%] translate-y-[-50%] rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
+        <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-full max-w-[25rem] translate-x-[-50%] translate-y-[-50%] rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
           <div className="flex items-start justify-between">
             <Dialog.Title className="text-xl font-bold text-gray-900 font-serif">
               Join the waitlist

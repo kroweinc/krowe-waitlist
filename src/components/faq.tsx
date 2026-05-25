@@ -156,7 +156,7 @@ export function KroweHelpdeskFAQ() {
 
     return (
         <section className="w-full py-16 md:py-24">
-            <div className="mx-auto max-w-[1150px] px-4 sm:px-6">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6">
                 {/* Header */}
                 <div className="mb-8 flex flex-col gap-4 md:mb-10 md:flex-row md:items-end md:justify-between">
                     <div>
@@ -182,7 +182,7 @@ export function KroweHelpdeskFAQ() {
                                     Showing {tickets.length}
                                 </span>
                             </div>
-                            <div className="relative max-h-[420px] flex-1 overflow-y-auto">
+                            <div className="relative max-h-[26.25rem] flex-1 overflow-y-auto">
                                 {tickets.map((ticket) => (
                                     <TicketRow
                                         key={ticket.id}
@@ -200,7 +200,7 @@ export function KroweHelpdeskFAQ() {
                         </div>
 
                         {/* Right Panel - Ticket Detail */}
-                        <div className="relative min-h-[480px] bg-neutral-50/50">
+                        <div className="relative min-h-[30rem] bg-neutral-50/50">
                             {selectedTicket ? (
                                 <TicketDetail ticket={selectedTicket} allTickets={tickets} onRelatedClick={handleRelatedClick} />
                             ) : (
@@ -225,7 +225,7 @@ export function KroweHelpdeskFAQ() {
                                         Showing {tickets.length}
                                     </span>
                                 </div>
-                                <div className="max-h-[400px] overflow-y-auto">
+                                <div className="max-h-[25rem] overflow-y-auto">
                                     {tickets.map((ticket) => (
                                         <TicketRow
                                             key={ticket.id}
@@ -285,7 +285,7 @@ const TicketRow = forwardRef<HTMLButtonElement, TicketRowProps>(({ ticket, isAct
                 }`}
         >
             {/* Active left accent bar */}
-            {isActive && <span className="absolute left-0 top-0 h-full w-[3px] bg-orange-500" />}
+            {isActive && <span className="absolute left-0 top-0 h-full w-0.5 bg-orange-500" />}
             <div className="flex items-start justify-between gap-2">
                 <h3 className="text-sm font-medium leading-snug text-neutral-800 font-serif">{ticket.question}</h3>
                 <ChevronRight
@@ -369,7 +369,7 @@ function TicketDetail({ ticket, allTickets, onRelatedClick, isMobile }: TicketDe
 
 function TagChip({ tag }: { tag: Tag }) {
     return (
-        <span className="rounded bg-orange-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-orange-600">
+        <span className="rounded bg-orange-100 px-2 py-0.5 text-[0.625rem] font-semibold uppercase tracking-wider text-orange-600">
             {tag}
         </span>
     )

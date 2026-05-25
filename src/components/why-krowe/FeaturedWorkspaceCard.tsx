@@ -36,7 +36,7 @@ export function FeaturedWorkspaceCard() {
       <div className="mb-6 grid grid-cols-2 gap-4 border-b border-border pb-6 sm:grid-cols-4">
         {stats.map((stat) => (
           <div key={stat.label}>
-            <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+            <p className="mb-1 text-[0.625rem] font-semibold uppercase tracking-wider text-muted-foreground">
               {stat.label}
             </p>
             <p
@@ -60,7 +60,7 @@ export function FeaturedWorkspaceCard() {
                 <span className="font-medium text-foreground">{item.initial}</span> {item.actionPrefix}{" "}
                 <span className="font-medium text-foreground">{item.actionTarget}</span>
                 {item.badge && (
-                  <span className="ml-2 inline-flex items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-600">
+                  <span className="ml-2 inline-flex items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[0.625rem] font-semibold uppercase tracking-wide text-emerald-600">
                     {item.badge}
                   </span>
                 )}

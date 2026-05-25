@@ -15,7 +15,7 @@ export function ClientStatusCard({ client, badge, badgeClass, quote, footer }: C
         <h4 className="font-serif text-lg text-foreground">{client}</h4>
         <span
           className={cn(
-            "inline-flex shrink-0 items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide",
+            "inline-flex shrink-0 items-center rounded-full border px-2.5 py-0.5 text-[0.625rem] font-semibold uppercase tracking-wide",
             badgeClass,
           )}
         >

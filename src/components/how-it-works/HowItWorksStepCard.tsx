@@ -29,7 +29,7 @@ export function HowItWorksStepCard({
                 className,
             )}
         >
-            <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            <p className="text-[0.625rem] font-mono uppercase tracking-widest text-muted-foreground">
                 STEP {step}
             </p>
 
@@ -37,7 +37,7 @@ export function HowItWorksStepCard({
                 {avatar}
                 <span
                     className={cn(
-                        "text-[10px] font-bold uppercase tracking-widest",
+                        "text-[0.625rem] font-bold uppercase tracking-widest",
                         roleClassName ?? "text-primary",
                     )}
                 >

@@ -12,10 +12,10 @@ export function KroweStepPreview() {
         <>
             <div className="bg-secondary/80 rounded-xl p-4 border border-border/60">
                 <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                    <span className="text-[0.625rem] font-bold uppercase tracking-widest text-muted-foreground">
                         Workspace
                     </span>
-                    <span className="flex items-center gap-1.5 text-[10px] font-bold text-green-600">
+                    <span className="flex items-center gap-1.5 text-[0.625rem] font-bold text-green-600">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden />
                         <span>live</span>
                         <span className="sr-only">Workspace is live</span>

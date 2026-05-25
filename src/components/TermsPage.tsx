@@ -5,9 +5,9 @@ export default function TermsPage() {
     <div className="min-h-screen bg-white text-gray-900 antialiased">
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-12 h-16 flex items-center gap-4">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 h-16 flex items-center gap-4">
           <Link to="/" className="flex items-center gap-2">
-            <img src="/KroweIcon.svg" width={28} height={28} alt="" />
+            <img src="/KroweIcon.svg" className="h-7 w-7" alt="" />
             <span className="font-bold text-lg text-gray-900 font-display">Krowe</span>
           </Link>
           <span className="text-gray-300">/</span>
@@ -15,7 +15,7 @@ export default function TermsPage() {
         </div>
       </nav>
 
-      <main className="max-w-[760px] mx-auto px-6 lg:px-8 pt-32 pb-24">
+      <main className="max-w-3xl mx-auto px-6 lg:px-8 pt-32 pb-24">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tighter font-serif mb-4 text-gray-900">Terms of Service</h1>
         <p className="text-gray-400 text-sm mb-12">Last updated: March 27, 2026</p>
 

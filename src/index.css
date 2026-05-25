@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+    html {
+        font-size: 87.5%;
+    }
+
     :root {
         --background: 0 0% 100%;
         --foreground: 222.2 84% 4.9%;
@@ -36,7 +40,7 @@
     .blueprint-grid-light {
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-        background-size: 40px 40px;
+        background-size: 2.5rem 2.5rem;
     }
 
     /* Landing page: cream background + blueprint grid (hero through FAQ) */
@@ -44,7 +48,7 @@
         background-color: #FDF9F3;
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-        background-size: 40px 40px;
+        background-size: 2.5rem 2.5rem;
     }
 
     .glow-line-light {
@@ -57,7 +61,7 @@
         background-color: #0a0a0c;
         background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-        background-size: 40px 40px;
+        background-size: 2.5rem 2.5rem;
     }
 
     .footer-glow-line {
@@ -99,7 +103,7 @@
         background-image:
             linear-gradient(to right, hsl(var(--primary) / 0.06) 1px, transparent 1px),
             linear-gradient(to bottom, hsl(var(--primary) / 0.06) 1px, transparent 1px);
-        background-size: 28px 28px;
+        background-size: 1.75rem 1.75rem;
     }
 }
 
