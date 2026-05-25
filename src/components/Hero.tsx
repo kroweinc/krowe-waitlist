@@ -79,7 +79,11 @@ export function Hero({ onJoinWaitlist }: HeroProps) {
                   alt={school.name}
                   width={school.name === "Yale" ? 72 : 96}
                   height={school.name === "Yale" ? 72 : 96}
-                  className={`${school.name === "NYU" ? "object-cover" : "object-contain"} ${school.name === "Yale" ? "h-9 sm:h-12 md:h-16" : "h-10 sm:h-14 md:h-20"} w-auto`}
+                  className={`object-contain ${
+                    school.name === "Yale"
+                      ? "h-12 w-12 sm:h-14 sm:w-14 md:h-[72px] md:w-[72px]"
+                      : "h-16 w-16 sm:h-20 sm:w-20 md:h-[96px] md:w-[96px]"
+                  }`}
                 />
               </div>
               ))
