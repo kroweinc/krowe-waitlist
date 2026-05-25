@@ -14,7 +14,7 @@ export function Hero({ onJoinWaitlist }: HeroProps) {
             V1.0 · EARLY ACCESS
           </span>
           <span className="px-4 py-2 text-foreground">
-            247 operators on the waitlist
+            Sign up to be the first to access it!
           </span>
         </div>
 
