@@ -1,7 +1,7 @@
 {
   "rewrites": [
-    { "source": "/admin", "destination": "https://krowe-apply.vercel.app/admin" },
-    { "source": "/admin/:path*", "destination": "https://krowe-apply.vercel.app/admin/:path*" },
+    { "source": "/admin", "destination": "https://krowe-internal.vercel.app/admin" },
+    { "source": "/admin/:path*", "destination": "https://krowe-internal.vercel.app/admin/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
