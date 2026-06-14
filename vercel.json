@@ -2,6 +2,106 @@
   "rewrites": [
     { "source": "/admin", "destination": "https://krowe-internal.vercel.app/admin" },
     { "source": "/admin/:path*", "destination": "https://krowe-internal.vercel.app/admin/:path*" },
+    {
+      "source": "/signup",
+      "destination": "https://kroweportal.vercel.app/login?mode=signup&next=/portal"
+    },
+    {
+      "source": "/portal",
+      "destination": "https://kroweportal.vercel.app/portal"
+    },
+    {
+      "source": "/login",
+      "destination": "https://kroweportal.vercel.app/login"
+    },
+    {
+      "source": "/auth/:path*",
+      "destination": "https://kroweportal.vercel.app/auth/:path*"
+    },
+    {
+      "source": "/reset-password",
+      "destination": "https://kroweportal.vercel.app/reset-password"
+    },
+    {
+      "source": "/onboarding/:path*",
+      "destination": "https://kroweportal.vercel.app/onboarding/:path*"
+    },
+    {
+      "source": "/onboarding",
+      "destination": "https://kroweportal.vercel.app/onboarding"
+    },
+    {
+      "source": "/b/:path*",
+      "destination": "https://kroweportal.vercel.app/b/:path*"
+    },
+    {
+      "source": "/b",
+      "destination": "https://kroweportal.vercel.app/b"
+    },
+    {
+      "source": "/o/:path*",
+      "destination": "https://kroweportal.vercel.app/o/:path*"
+    },
+    {
+      "source": "/o",
+      "destination": "https://kroweportal.vercel.app/o"
+    },
+    {
+      "source": "/join/:path*",
+      "destination": "https://kroweportal.vercel.app/join/:path*"
+    },
+    {
+      "source": "/p/:path*",
+      "destination": "https://kroweportal.vercel.app/p/:path*"
+    },
+    {
+      "source": "/prd/:path*",
+      "destination": "https://kroweportal.vercel.app/prd/:path*"
+    },
+    {
+      "source": "/contract/:path*",
+      "destination": "https://kroweportal.vercel.app/contract/:path*"
+    },
+    {
+      "source": "/quotes/:path*",
+      "destination": "https://kroweportal.vercel.app/quotes/:path*"
+    },
+    {
+      "source": "/api/auth/logout",
+      "destination": "https://kroweportal.vercel.app/api/auth/logout"
+    },
+    {
+      "source": "/api/github/:path*",
+      "destination": "https://kroweportal.vercel.app/api/github/:path*"
+    },
+    {
+      "source": "/api/attachments",
+      "destination": "https://kroweportal.vercel.app/api/attachments"
+    },
+    {
+      "source": "/api/audit-log",
+      "destination": "https://kroweportal.vercel.app/api/audit-log"
+    },
+    {
+      "source": "/api/build-prompts",
+      "destination": "https://kroweportal.vercel.app/api/build-prompts"
+    },
+    {
+      "source": "/api/subtasks",
+      "destination": "https://kroweportal.vercel.app/api/subtasks"
+    },
+    {
+      "source": "/api/task-commits",
+      "destination": "https://kroweportal.vercel.app/api/task-commits"
+    },
+    {
+      "source": "/KroweIcon.png",
+      "destination": "https://kroweportal.vercel.app/KroweIcon.png"
+    },
+    {
+      "source": "/images/:path*",
+      "destination": "https://kroweportal.vercel.app/images/:path*"
+    },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
