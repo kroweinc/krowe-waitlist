@@ -25,7 +25,7 @@ export default function PrivacyPage() {
             <p>
               Krowe Technologies Inc. ("Krowe", "we", "us", or "our") is committed to protecting your privacy. This
               Privacy Policy explains how we collect, use, and safeguard information when you visit our website or
-              sign up for our waitlist.
+              create an account.
             </p>
           </section>
 
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">3. How We Use Your Information</h2>
             <ul className="list-disc list-inside space-y-2 text-gray-500">
-              <li>Send waitlist updates and launch announcements.</li>
+              <li>Send product updates and launch announcements.</li>
               <li>Evaluate job applications and follow up with candidates.</li>
               <li>Improve our product and understand our audience.</li>
               <li>Comply with legal obligations.</li>

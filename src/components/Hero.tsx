@@ -1,11 +1,9 @@
 import { Button } from "./ui/button"
 import { HeroCommandCenter } from "./hero-mockup/HeroCommandCenter"
 
-interface HeroProps {
-  onJoinWaitlist?: () => void
-}
+const PORTAL_SIGNUP_URL = "https://krowehub.com/signup"
 
-export function Hero({ onJoinWaitlist }: HeroProps) {
+export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col pt-24 md:pt-28 pb-8 overflow-hidden">
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center w-full">
@@ -30,12 +28,11 @@ export function Hero({ onJoinWaitlist }: HeroProps) {
 
         <div className="mt-8 sm:mt-10 mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none">
           <Button
-            type="button"
-            onClick={() => onJoinWaitlist?.()}
+            asChild
             size="lg"
             className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 py-4 sm:px-8 sm:py-6 text-base font-medium text-white font-bold w-full sm:w-auto"
           >
-            Join Waitlist
+            <a href={PORTAL_SIGNUP_URL}>Get Started</a>
           </Button>
           <Button
             variant="outline"

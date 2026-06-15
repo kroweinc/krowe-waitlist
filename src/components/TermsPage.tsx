@@ -25,7 +25,7 @@ export default function TermsPage() {
             <p>
               By accessing or using the Krowe website (krowe.co) or any of our services, you agree to be bound by
               these Terms of Service. If you do not agree, please do not use our site or services. These terms apply
-              to all visitors, waitlist members, and job applicants.
+              to all visitors, account holders, and job applicants.
             </p>
           </section>
 
@@ -33,15 +33,15 @@ export default function TermsPage() {
             <h2 className="text-xl font-semibold text-gray-900 mb-3">2. Description of Service</h2>
             <p>
               Krowe Technologies Inc. ("Krowe", "we", "us", or "our") is building an AI-powered operations platform
-              for startups. The current site is a pre-launch waitlist and informational resource. Features and
+              for startups. The current site is an account creation and informational resource. Features and
               functionality described are subject to change prior to launch.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">3. Waitlist</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">3. Accounts and Access</h2>
             <p className="mb-3">
-              Joining the waitlist does not guarantee access to the Krowe platform. By submitting your email, you
+              Creating an account does not guarantee immediate access to every Krowe platform feature. By submitting your information, you
               agree to:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-500">

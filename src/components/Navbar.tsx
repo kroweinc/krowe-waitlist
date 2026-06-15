@@ -8,11 +8,10 @@ const NAV_LINKS = [
   { label: "FAQ", href: "#faq" },
 ];
 
-interface NavbarProps {
-  onJoinWaitlist?: () => void
-}
+const PORTAL_SIGNUP_URL = "https://krowehub.com/signup";
+const PORTAL_LOGIN_URL = "https://krowehub.com/login";
 
-export default function Navbar({ onJoinWaitlist }: NavbarProps) {
+export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const scrollToTarget = (href: string) => {
@@ -67,19 +66,18 @@ export default function Navbar({ onJoinWaitlist }: NavbarProps) {
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <button
-              className="flex items-center gap-4"
-              type="button"
-              onClick={() => onJoinWaitlist?.()}
+            <a
+              href={PORTAL_LOGIN_URL}
+              className="inline-flex items-center text-text-light px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold hover:bg-gray-100 transition-colors cursor-pointer"
             >
-              <a
-                href="#"
-                onClick={(e) => e.preventDefault()}
-                className="bg-text-light text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer"
-              >
-                Join Waitlist
-              </a>
-            </button>
+              Log in
+            </a>
+            <a
+              href={PORTAL_SIGNUP_URL}
+              className="bg-text-light text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer"
+            >
+              Sign up
+            </a>
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
@@ -120,16 +118,28 @@ export default function Navbar({ onJoinWaitlist }: NavbarProps) {
                 </a>
               ))}
             </nav>
-            <button
-              type="button"
-              onClick={() => {
-                setMobileOpen(false);
-                onJoinWaitlist?.();
-              }}
-              className="mt-5 w-full bg-text-light text-white py-3 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
-            >
-              Join Waitlist
-            </button>
+            <div className="mt-5 flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  window.location.href = PORTAL_LOGIN_URL;
+                }}
+                className="w-full border border-gray-300 text-text-light py-3 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Log in
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  window.location.href = PORTAL_SIGNUP_URL;
+                }}
+                className="w-full bg-text-light text-white py-3 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
+              >
+                Sign up
+              </button>
+            </div>
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>

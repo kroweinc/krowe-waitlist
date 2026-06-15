@@ -4,11 +4,7 @@ import { ClientProgressCard } from "./why-krowe/ClientProgressCard"
 import { WhyKroweCta } from "./why-krowe/WhyKroweCta"
 import { clientStatusCards } from "./why-krowe/whyKroweContent"
 
-interface DecisionConsoleBenefitsProps {
-  onJoinWaitlist?: () => void
-}
-
-export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionConsoleBenefitsProps) {
+export default function DecisionConsoleBenefits() {
   return (
     <section id="benefits" className="w-full page-surface py-20 sm:py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -36,7 +32,7 @@ export default function DecisionConsoleBenefits({ onJoinWaitlist }: DecisionCons
         </div>
 
         <div className="mt-6">
-          <WhyKroweCta onJoinWaitlist={onJoinWaitlist} />
+          <WhyKroweCta />
         </div>
       </div>
     </section>

@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom"
 import { DashboardCard } from "./dashboard-card"
 
-interface FooterProps {
-  onJoinWaitlist?: () => void
-}
+const PORTAL_SIGNUP_URL = "https://krowehub.com/signup"
 
-export default function Footer({ onJoinWaitlist }: FooterProps) {
+export default function Footer() {
     // Duplicate content for infinite scroll effect if needed, 
     // or rely on CSS animation. The CSS uses logic that assumes content is wide enough.
     // We'll duplicate the items in the ticker div to ensure smooth infinite loop.
@@ -37,14 +35,13 @@ export default function Footer({ onJoinWaitlist }: FooterProps) {
                                 <p className="text-slate-400 text-sm leading-relaxed">Transform your idea into reality easily by using Krowe</p>
                             </div>
                             <div className="mt-auto space-y-4 relative z-10">
-                                <button
+                                <a
+                                    href={PORTAL_SIGNUP_URL}
                                     className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary h-12 px-6 text-white text-base font-bold transition-all hover:bg-orange-500 active:scale-[0.98]"
-                                    type="button"
-                                    onClick={() => onJoinWaitlist?.()}
                                 >
-                                    <span>Join the waitlist</span>
+                                    <span>Create an account</span>
                                     <span className="material-symbols-outlined">arrow_forward</span>
-                                </button>
+                                </a>
 
                             </div>
                         </div>

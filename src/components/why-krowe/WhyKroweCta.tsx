@@ -1,11 +1,9 @@
 import { Button } from "../ui/button"
 import { ctaCopy } from "./whyKroweContent"
 
-type WhyKroweCtaProps = {
-  onJoinWaitlist?: () => void
-}
+const PORTAL_SIGNUP_URL = "https://krowehub.com/signup"
 
-export function WhyKroweCta({ onJoinWaitlist }: WhyKroweCtaProps) {
+export function WhyKroweCta() {
   return (
     <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-card p-6 shadow-soft sm:flex-row sm:items-center md:p-8">
       <div>
@@ -14,11 +12,10 @@ export function WhyKroweCta({ onJoinWaitlist }: WhyKroweCtaProps) {
       </div>
       <div className="flex w-full shrink-0 flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
         <Button
-          type="button"
-          onClick={() => onJoinWaitlist?.()}
+          asChild
           className="rounded-lg bg-primary px-6 font-semibold text-primary-foreground hover:bg-primary/90"
         >
-          {ctaCopy.primaryLabel}
+          <a href={PORTAL_SIGNUP_URL}>{ctaCopy.primaryLabel}</a>
         </Button>
         <Button
           type="button"

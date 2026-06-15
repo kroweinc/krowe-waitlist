@@ -82,6 +82,6 @@ export const clientProgress = [
 export const ctaCopy = {
   headline: "Set up your first workspace in under 2 minutes.",
   subtext: "No card, no demo call. Just bring a client and start.",
-  primaryLabel: "Get early access",
+  primaryLabel: "Create an account",
   secondaryLabel: "See a demo →",
 }

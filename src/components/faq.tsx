@@ -71,7 +71,7 @@ const tickets: Ticket[] = [
     {
         id: 4,
         tag: "ACCESS",
-        question: "Do I need clients lined up before joining the waitlist?",
+        question: "Do I need clients lined up before creating an account?",
         answer:
             "No. Whether you already have operator-clients or you're just starting to take work on, Krowe scales with you. You can port existing relationships in or stand up your first client workspace from scratch.",
         bullets: [
@@ -88,9 +88,9 @@ const tickets: Ticket[] = [
         tag: "PRICING",
         question: "What does Krowe cost?",
         answer:
-            "Pricing isn't public yet — we're still in closed early access. Operators who join the waitlist get first access when workspaces open up, plus grandfathered pricing locked in before the public launch.",
+            "Pricing isn't public yet — we're still in closed early access. Operators who create an account get first access when workspaces open up, plus grandfathered pricing locked in before the public launch.",
         bullets: [
-            "No card and no demo call to join the waitlist",
+            "No card and no demo call to create an account",
             "Founding operators get locked-in early pricing",
             "Public pricing announced before general launch",
         ],
@@ -103,7 +103,7 @@ const tickets: Ticket[] = [
         tag: "ROADMAP",
         question: "When will I actually get access?",
         answer:
-            "Krowe is in closed early access right now and we're letting operators in as workspaces open up. Your spot is determined by when you join the waitlist and the kind of work you're already doing — the earlier you're on, the sooner you're in.",
+            "Krowe is in closed early access right now and we're letting operators in as workspaces open up. Your spot is determined by when you create your account and the kind of work you're already doing — the earlier you're on, the sooner you're in.",
         bullets: [
             "Priority access for the first wave of operators",
             "Early access invites going out continuously",

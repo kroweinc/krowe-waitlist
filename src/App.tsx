@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 const LandingPage = lazy(() => import('./components/LandingPage'));
@@ -18,11 +18,23 @@ function RouteFallback() {
   );
 }
 
+function ExternalRedirect({ to }: { to: string }) {
+  useEffect(() => {
+    window.location.replace(to);
+  }, [to]);
+
+  return <RouteFallback />;
+}
+
 function App() {
   return (
     <Suspense fallback={<RouteFallback />}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/signup"
+          element={<ExternalRedirect to="https://krowehub.com/signup" />}
+        />
         <Route path="/careers" element={<CareersPage />} />
         <Route path="/careers/apply" element={<ApplyPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
