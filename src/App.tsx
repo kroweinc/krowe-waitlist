@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 
 const LandingPage = lazy(() => import('./components/LandingPage'));
 const CareersPage = lazy(() => import('./components/CareersPage'));
@@ -40,6 +41,7 @@ function App() {
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
       </Routes>
+      <Analytics />
     </Suspense>
   );
 }
