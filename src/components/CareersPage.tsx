@@ -39,7 +39,7 @@ export default function CareersPage() {
         <nav className="mx-auto max-w-5xl px-4 w-full pointer-events-auto">
           <div className="bg-surface-light backdrop-blur-md bg-opacity-80 border border-gray-200 rounded-full px-6 py-3 shadow-soft flex items-center justify-between">
             <Link to="/">
-              <img src="/KroweLogo.png" alt="Krowe Logo" className="h-[6.25rem] w-auto" />
+              <img src="/KroweLogo.png" alt="Krowe Logo" className="h-6 sm:h-8 w-auto" width={100} height={100} />
             </Link>
             <Link
               to="/"
