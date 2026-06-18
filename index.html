@@ -3,6 +3,42 @@
 
 <head>
   <meta charset="UTF-8" />
+
+  <!--
+    Returning-user redirect. If a signed-in user opens the marketing home page,
+    bounce them straight to the portal — the way most apps send known users to
+    their dashboard. This runs synchronously before the SPA mounts, so there's
+    no flash of the landing page.
+
+    It must NOT trap them: if they reached the home page via the browser
+    back/forward button (i.e. they deliberately backed out of the portal), we
+    leave them here. Only a fresh visit — typed URL, link, bookmark, reload —
+    redirects. Scoped to "/" so /careers, /apply, and the legal pages (which
+    share this index.html) are never affected. Wrapped in try/catch so it can
+    never block the page from rendering.
+  -->
+  <script>
+    (function () {
+      try {
+        if (window.location.pathname !== '/') return;
+
+        var nav = performance.getEntriesByType('navigation')[0];
+        if (nav && nav.type === 'back_forward') return;
+
+        // @supabase/ssr stores the session in a non-httpOnly `sb-<ref>-auth-token`
+        // cookie (sometimes chunked: `.0`, `.1`). The portal is proxied under
+        // this domain, so the cookie is readable here. Present + non-empty value
+        // ⇒ the visitor is signed in.
+        var signedIn = document.cookie.split('; ').some(function (c) {
+          return /^sb-.+-auth-token(\.\d+)?=.+/.test(c);
+        });
+        if (signedIn) window.location.replace('/portal');
+      } catch (e) {
+        /* never let the redirect check block the landing page */
+      }
+    })();
+  </script>
+
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
