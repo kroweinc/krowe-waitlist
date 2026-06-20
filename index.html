@@ -17,10 +17,18 @@
     share this index.html) are never affected. Wrapped in try/catch so it can
     never block the page from rendering.
 
-    Escape hatch: visit the domain with "?stay" (e.g. krowe.app/?stay) to view
-    the landing page even while signed in. That choice is remembered for the
-    rest of the browser-tab session, so reloads and in-page navigation won't
-    bounce you. Open a fresh tab to get the default redirect behavior back.
+    Escape hatch: visit the domain with "?stay" (e.g. krowehub.com/?stay), or
+    just go to krowehub.com/home, to view the landing page even while signed in.
+    A "?stay" choice is remembered for the rest of the browser-tab session, so
+    reloads and in-page navigation won't bounce you. Open a fresh tab to get the
+    default redirect behavior back.
+
+    Loop breaker: a stale auth cookie makes the portal reject the session and
+    bounce the visitor to /login. If we naively redirect on every "/" load, the
+    visitor ping-pongs between the sign-in screen and here whenever they trim the
+    URL back to the bare domain. So we leave a breadcrumb when we send someone to
+    the portal; if they come back to "/" we know the portal didn't keep them and
+    we stop redirecting for the rest of the session.
   -->
   <script>
     (function () {
@@ -31,14 +39,29 @@
 
         if (window.location.pathname !== '/') return;
 
+        var STAY_KEY = 'krowe-stay-on-landing';
+        var BOUNCE_KEY = 'krowe-portal-bounce';
+
         // Opt-out: "?stay" lets a signed-in user view the landing page. Persist
         // it for the tab session so later reloads/navigation don't re-bounce.
-        var STAY_KEY = 'krowe-stay-on-landing';
         if (/[?&]stay\b/.test(window.location.search)) {
           try { sessionStorage.setItem(STAY_KEY, '1'); } catch (e) {}
           return;
         }
         try { if (sessionStorage.getItem(STAY_KEY)) return; } catch (e) {}
+
+        // Loop breaker. If we already bounced this session to /portal and we're
+        // back on the home page, the portal rejected the session (e.g. a stale
+        // cookie) and sent the visitor to /login. Don't bounce them again — that
+        // would trap them at the sign-in screen. Mark the session "stay" so we
+        // stop fighting them, and just render the landing page.
+        try {
+          if (sessionStorage.getItem(BOUNCE_KEY)) {
+            sessionStorage.removeItem(BOUNCE_KEY);
+            sessionStorage.setItem(STAY_KEY, '1');
+            return;
+          }
+        } catch (e) {}
 
         var nav = performance.getEntriesByType('navigation')[0];
         if (nav && nav.type === 'back_forward') return;
@@ -50,7 +73,12 @@
         var signedIn = document.cookie.split('; ').some(function (c) {
           return /^sb-.+-auth-token(\.\d+)?=.+/.test(c);
         });
-        if (signedIn) window.location.replace('/portal');
+        if (signedIn) {
+          // Breadcrumb so the loop breaker above can tell, on the next visit to
+          // this page, whether the portal kept us or kicked us back to /login.
+          try { sessionStorage.setItem(BOUNCE_KEY, '1'); } catch (e) {}
+          window.location.replace('/portal');
+        }
       } catch (e) {
         /* never let the redirect check block the landing page */
       }

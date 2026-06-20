@@ -33,6 +33,13 @@ function App() {
     <Suspense fallback={<RouteFallback />}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        {/*
+          Always-landing escape hatch. The returning-user redirect in index.html
+          only fires on "/", so "/home" reliably shows the landing page for
+          signed-in users without bouncing them to the portal — a one-step way
+          back from the sign-in screen (krowehub.com/home).
+        */}
+        <Route path="/home" element={<LandingPage />} />
         <Route
           path="/signup"
           element={<ExternalRedirect to="https://krowehub.com/signup" />}
