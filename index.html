@@ -16,6 +16,11 @@
     redirects. Scoped to "/" so /careers, /apply, and the legal pages (which
     share this index.html) are never affected. Wrapped in try/catch so it can
     never block the page from rendering.
+
+    Escape hatch: visit the domain with "?stay" (e.g. krowe.app/?stay) to view
+    the landing page even while signed in. That choice is remembered for the
+    rest of the browser-tab session, so reloads and in-page navigation won't
+    bounce you. Open a fresh tab to get the default redirect behavior back.
   -->
   <script>
     (function () {
@@ -25,6 +30,15 @@
         if (host === 'localhost' || host === '127.0.0.1') return;
 
         if (window.location.pathname !== '/') return;
+
+        // Opt-out: "?stay" lets a signed-in user view the landing page. Persist
+        // it for the tab session so later reloads/navigation don't re-bounce.
+        var STAY_KEY = 'krowe-stay-on-landing';
+        if (/[?&]stay\b/.test(window.location.search)) {
+          try { sessionStorage.setItem(STAY_KEY, '1'); } catch (e) {}
+          return;
+        }
+        try { if (sessionStorage.getItem(STAY_KEY)) return; } catch (e) {}
 
         var nav = performance.getEntriesByType('navigation')[0];
         if (nav && nav.type === 'back_forward') return;
