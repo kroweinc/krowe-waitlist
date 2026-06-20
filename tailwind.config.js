@@ -15,6 +15,7 @@ export default {
                 "text-light": "#1A1A1A",
                 "text-muted-light": "#666666",
                 "navy": "#0f172a",
+                ink: "#0a0a0c",
                 card: {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
@@ -45,18 +46,20 @@ export default {
                 },
             },
             fontFamily: {
-                sans: ["Avenir", "sans-serif"],
-                display: ["Avenir", "sans-serif"], // Added for new Hero
-                outfit: ["Avenir", "sans-serif"],   // Added for new Hero
+                sans: ["Geist", "-apple-system", "BlinkMacSystemFont", "Avenir Next", "system-ui", "sans-serif"],
+                serif: ["Instrument Serif", "ui-serif", "Georgia", "serif"],
+                display: ["Instrument Serif", "ui-serif", "Georgia", "serif"],
+                mono: ["Geist Mono", "JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
             },
             borderRadius: {
                 DEFAULT: "0.75rem",
                 'xl': "1rem",
                 '2xl': "1.5rem",
+                '3xl': "1.75rem",
             },
             boxShadow: {
-                'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-                'glow': '0 0 20px rgba(255, 107, 74, 0.3)',
+                'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                'glow': '0 8px 24px -8px rgba(249,115,22,0.40)',
                 'card': '0 10px 40px -10px rgba(0,0,0,0.08)',
             }
         },

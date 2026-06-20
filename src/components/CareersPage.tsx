@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Navbar, Footer } from './landing';
 
 const jobs = [
   {
@@ -34,23 +34,7 @@ export { jobs };
 export default function CareersPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-x-hidden w-full blueprint-grid-light font-serif">
-      {/* Header */}
-      <header className="w-full py-4 fixed top-0 left-0 right-0 z-50 pointer-events-none">
-        <nav className="mx-auto max-w-5xl px-4 w-full pointer-events-auto">
-          <div className="bg-surface-light backdrop-blur-md bg-opacity-80 border border-gray-200 rounded-full px-6 py-3 shadow-soft flex items-center justify-between">
-            <Link to="/">
-              <img src="/KroweLogo.png" alt="Krowe Logo" className="h-6 sm:h-8 w-auto" width={100} height={100} />
-            </Link>
-            <Link
-              to="/"
-              className="text-sm font-medium text-text-muted-light hover:text-primary transition-colors flex items-center gap-1"
-            >
-              <span>←</span>
-              <span>Back to home</span>
-            </Link>
-          </div>
-        </nav>
-      </header>
+      <Navbar />
       <div className="h-20" />
 
       <div className="glow-line-light" />
@@ -100,6 +84,8 @@ export default function CareersPage() {
           ))}
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

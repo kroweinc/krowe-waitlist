@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 
 const LandingPage = lazy(() => import('./components/LandingPage'));
@@ -7,6 +7,7 @@ const CareersPage = lazy(() => import('./components/CareersPage'));
 const ApplyPage = lazy(() => import('./components/ApplyPage'));
 const PrivacyPage = lazy(() => import('./components/PrivacyPage'));
 const TermsPage = lazy(() => import('./components/TermsPage'));
+const BuilderProfilePage = lazy(() => import('./components/BuilderProfilePage'));
 
 function RouteFallback() {
   return (
@@ -36,10 +37,16 @@ function App() {
           path="/signup"
           element={<ExternalRedirect to="https://krowehub.com/signup" />}
         />
+        <Route
+          path="/portal/*"
+          element={<ExternalRedirect to="https://krowehub.com/portal" />}
+        />
         <Route path="/careers" element={<CareersPage />} />
         <Route path="/careers/apply" element={<ApplyPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
+        <Route path="/builder" element={<Navigate to="/builder/basics" replace />} />
+        <Route path="/builder/:section" element={<BuilderProfilePage />} />
       </Routes>
       <Analytics />
     </Suspense>

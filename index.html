@@ -20,6 +20,10 @@
   <script>
     (function () {
       try {
+        // Local Vite dev has no /portal proxy — skip so the landing page still renders.
+        var host = window.location.hostname;
+        if (host === 'localhost' || host === '127.0.0.1') return;
+
         if (window.location.pathname !== '/') return;
 
         var nav = performance.getEntriesByType('navigation')[0];
@@ -46,14 +50,14 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Krowe</title>
-  <meta name="description" content="Manage every operator-client in one workspace: delivery, comments, and ongoing conversation co-located with the work." />
+  <title>Krowe — Hire a vetted builder to ship your internal systems</title>
+  <meta name="description" content="From a discovery call to a shipped repo — one portal. PRD, quote, contract, tasks, and the live repo, generated, priced, and tracked end to end." />
 
   <!-- Open Graph / Facebook / LinkedIn / iMessage / Slack -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://krowehub.com/" />
   <meta property="og:title" content="Krowe" />
-  <meta property="og:description" content="Manage every operator-client in one workspace: delivery, comments, and ongoing conversation co-located with the work." />
+  <meta property="og:description" content="From a discovery call to a shipped repo — one portal. PRD, quote, contract, tasks, and the live repo, generated, priced, and tracked end to end." />
   <meta property="og:image" content="https://krowehub.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -62,12 +66,18 @@
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@KroweInc" />
+  <meta name="twitter:creator" content="@KroweInc" />
   <meta name="twitter:url" content="https://krowehub.com/" />
   <meta name="twitter:title" content="Krowe" />
-  <meta name="twitter:description" content="Manage every operator-client in one workspace: delivery, comments, and ongoing conversation co-located with the work." />
+  <meta name="twitter:description" content="From a discovery call to a shipped repo — one portal. PRD, quote, contract, tasks, and the live repo, generated, priced, and tracked end to end." />
   <meta name="twitter:image" content="https://krowehub.com/og-image.png" />
+  <meta name="twitter:image:alt" content="Krowe" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
 
 <body>
